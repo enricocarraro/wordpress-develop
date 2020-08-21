@@ -5722,7 +5722,7 @@ function _print_emoji_detection_script() {
 	);
 
 	$version   = 'ver=' . get_bloginfo( 'version' );
-	$type_attr = current_theme_supports( 'html5', 'style' ) ? '' : ' type="text/javascript"';
+	$type_attr = current_theme_supports( 'html5', 'style' ) ? array() : array('type' => 'text/javascript');
 
 	if ( SCRIPT_DEBUG ) {
 		$settings['source'] = array(
@@ -5732,12 +5732,9 @@ function _print_emoji_detection_script() {
 			'twemoji' => apply_filters( 'script_loader_src', includes_url( "js/twemoji.js?$version" ), 'twemoji' ),
 		);
 
-		?>
-		<script<?php echo $type_attr; ?>>
-			window._wpemojiSettings = <?php echo wp_json_encode( $settings ); ?>;
-			<?php readfile( ABSPATH . WPINC . '/js/wp-emoji-loader.js' ); ?>
-		</script>
-		<?php
+		$js = 'window._wpemojiSettings = '.wp_json_encode( $settings ).';';
+		$js .= file_get_contents( ABSPATH . WPINC . '/js/wp-emoji-loader.js' );
+		inline_js( $js, $type_attr );
 	} else {
 		$settings['source'] = array(
 			/** This filter is documented in wp-includes/class.wp-scripts.php */
@@ -5754,12 +5751,9 @@ function _print_emoji_detection_script() {
 		 * minified JavaScript. If you need to debug it, please turn on SCRIPT_DEBUG
 		 * and edit wp-emoji-loader.js directly.
 		 */
-		?>
-		<script<?php echo $type_attr; ?>>
-			window._wpemojiSettings = <?php echo wp_json_encode( $settings ); ?>;
-			include "js/wp-emoji-loader.min.js"
-		</script>
-		<?php
+		$js = 'window._wpemojiSettings = ' . wp_json_encode( $settings ) . ';';
+		$js .= 'include "js/wp-emoji-loader.min.js"';
+		inline_js ( $js, $type_attr );
 	}
 }
 

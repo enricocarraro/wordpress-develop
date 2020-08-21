@@ -2172,9 +2172,7 @@ function media_upload_form( $errors = null ) {
 	 */
 	$plupload_init = apply_filters( 'plupload_init', $plupload_init );
 
-	?>
-	<script type="text/javascript">
-	<?php
+	
 	// Verify size is an int. If not return default value.
 	$large_size_h = absint( get_option( 'large_size_h' ) );
 
@@ -2187,12 +2185,12 @@ function media_upload_form( $errors = null ) {
 	if ( ! $large_size_w ) {
 		$large_size_w = 1024;
 	}
+	
+	$js = "var resize_height = $large_size_h, resize_width = $large_size_w,\n";
+	$js .= 'wpUploaderInit = ' . wp_json_encode( $plupload_init ) . ';';
+	inline_js( $js );
 
 	?>
-	var resize_height = <?php echo $large_size_h; ?>, resize_width = <?php echo $large_size_w; ?>,
-	wpUploaderInit = <?php echo wp_json_encode( $plupload_init ); ?>;
-	</script>
-
 	<div id="plupload-upload-ui" class="hide-if-no-js">
 	<?php
 	/**

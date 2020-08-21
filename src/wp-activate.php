@@ -212,9 +212,8 @@ $blog_details = get_blog_details();
 	?>
 	</div>
 </div>
-<script type="text/javascript">
-	var key_input = document.getElementById('key');
-	key_input && key_input.focus();
-</script>
 <?php
+$js = "var key_input = document.getElementById('key');\n";
+$js .= 'key_input && key_input.focus();';
+inline_js( $js );
 get_footer( 'wp-activate' );

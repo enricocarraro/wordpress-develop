@@ -444,17 +444,20 @@ switch ( $step ) {
 }
 
 if ( ! wp_is_mobile() ) {
-	?>
-<script type="text/javascript">var t = document.getElementById('weblog_title'); if (t){ t.focus(); }</script>
-	<?php
+	$js = 'var t = document.getElementById("weblog_title"); if (t){ t.focus(); }';
+	inline_js( $js );
 }
 
 wp_print_scripts( $scripts_to_print );
-?>
-<script type="text/javascript">
+
+$js = <<<JS
 jQuery( function( $ ) {
 	$( '.hide-if-no-js' ).removeClass( 'hide-if-no-js' );
 } );
-</script>
+JS;
+
+inline_js( $js );
+
+?>
 </body>
 </html>

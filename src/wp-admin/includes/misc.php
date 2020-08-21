@@ -1010,7 +1010,8 @@ function wp_color_scheme_settings() {
 		);
 	}
 
-	echo '<script type="text/javascript">var _wpColorScheme = ' . wp_json_encode( array( 'icons' => $icon_colors ) ) . ";</script>\n";
+	$js = 'var _wpColorScheme = ' . wp_json_encode( array( 'icons' => $icon_colors ) ) . ';';
+	inline_js( $js );
 }
 
 /**
@@ -1279,12 +1280,13 @@ function wp_admin_canonical_url() {
 	$filtered_url = remove_query_arg( $removable_query_args, $current_url );
 	?>
 	<link id="wp-admin-canonical" rel="canonical" href="<?php echo esc_url( $filtered_url ); ?>" />
-	<script>
-		if ( window.history.replaceState ) {
-			window.history.replaceState( null, null, document.getElementById( 'wp-admin-canonical' ).href + window.location.hash );
-		}
-	</script>
 	<?php
+	$js = <<<JS
+	if ( window.history.replaceState ) {
+		window.history.replaceState( null, null, document.getElementById( 'wp-admin-canonical' ).href + window.location.hash );
+	}
+JS;
+	inline_js( $js );
 }
 
 /**
@@ -1319,13 +1321,12 @@ function wp_admin_headers() {
  * @since 4.6.0
  */
 function wp_page_reload_on_back_button_js() {
-	?>
-	<script>
-		if ( typeof performance !== 'undefined' && performance.navigation && performance.navigation.type === 2 ) {
-			document.location.reload( true );
-		}
-	</script>
-	<?php
+	$js = <<<JS
+	if ( typeof performance !== 'undefined' && performance.navigation && performance.navigation.type === 2 ) {
+		document.location.reload( true );
+	}
+JS;
+	inline_js( $js );
 }
 
 /**

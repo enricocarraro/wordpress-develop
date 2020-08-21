@@ -23,8 +23,7 @@ $title = __( 'Export' );
  * @since 3.5.0
  */
 function export_add_js() {
-	?>
-<script type="text/javascript">
+	$js = <<<'JS'
 	jQuery(document).ready(function($){
 		var form = $('#export-filters'),
 			filters = form.find('.export-filters');
@@ -38,8 +37,8 @@ function export_add_js() {
 			}
 		});
 	});
-</script>
-	<?php
+JS;
+	inline_js( $js );
 }
 add_action( 'admin_head', 'export_add_js' );
 
