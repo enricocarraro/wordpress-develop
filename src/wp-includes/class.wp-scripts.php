@@ -227,7 +227,7 @@ class WP_Scripts extends WP_Dependencies {
 			return $output;
 		}
 
-		$js = "$output";
+		$js = $output;
 
 		if ( $this->type_attr ) {
 			$js = "/* <![CDATA[ */\n$js\n/* ]]> */";
