@@ -1293,10 +1293,8 @@ switch ( $action ) {
 				do_action( 'login_footer' );
 
 				if ( $customize_login ) {
-					
-					$js = "setTimeout( function(){ new wp.customize.Messenger({ url: '".wp_customize_url()."', channel: 'login' }).send('login') }, 1000 );";
+					$js = "setTimeout( function(){ new wp.customize.Messenger({ url: '" . wp_customize_url() . "', channel: 'login' }).send('login') }, 1000 );";
 					inline_js( $js );
-					
 				}
 
 				?>

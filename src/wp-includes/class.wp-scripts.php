@@ -227,11 +227,11 @@ class WP_Scripts extends WP_Dependencies {
 			return $output;
 		}
 
-		$js = <<<JS
-/* <![CDATA[ */
-$output
-/* ]]> */
-JS;
+		$js = "$output";
+
+		if ( $this->type_attr ) {
+			$js = "/* <![CDATA[ */\n$js\n/* ]]> */";
+		}
 
 		inline_js( $js, array(
 			$this->type_attr,

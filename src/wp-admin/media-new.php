@@ -74,7 +74,8 @@ if ( get_user_setting( 'uploader' ) || isset( $_GET['browser-uploader'] ) ) {
 
 	<form enctype="multipart/form-data" method="post" action="<?php echo admin_url( 'media-new.php' ); ?>" class="<?php echo esc_attr( $form_class ); ?>" id="file-form">
 
-	<?php media_upload_form(); 
+	<?php 
+	media_upload_form(); 
 
 	inline_js( "var post_id = $post_id, shortform = 3;" );
 	?>

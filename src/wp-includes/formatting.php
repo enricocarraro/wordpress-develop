@@ -5732,7 +5732,7 @@ function _print_emoji_detection_script() {
 			'twemoji' => apply_filters( 'script_loader_src', includes_url( "js/twemoji.js?$version" ), 'twemoji' ),
 		);
 
-		$js = 'window._wpemojiSettings = '.wp_json_encode( $settings ).';';
+		$js = 'window._wpemojiSettings = ' . wp_json_encode( $settings ) . ';';
 		$js .= file_get_contents( ABSPATH . WPINC . '/js/wp-emoji-loader.js' );
 		inline_js( $js, $type_attr );
 	} else {

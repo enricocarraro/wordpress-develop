@@ -2188,30 +2188,27 @@ final class WP_Customize_Manager {
 			}
 		}
 
-		?>
-		<script type="text/javascript">
-			var _wpCustomizeSettings = <?php echo wp_json_encode( $settings ); ?>;
+		$js_wpCustomizeSettings = wp_json_encode( $settings );
+		$js_wpCustomizeSettings_values = '';
+		foreach ( $this->settings as $id => $setting ) {
+			if ( $setting->check_capabilities() ) {
+				$js_wpCustomizeSettings_values .= sprintf(
+					"v[%s] = %s;\n",
+					wp_json_encode( $id ),
+					wp_json_encode( $setting->js_value() )
+				);
+			}
+		}
+
+		$js = <<<JS
+			var _wpCustomizeSettings = $js_wpCustomizeSettings;
 			_wpCustomizeSettings.values = {};
 			(function( v ) {
-				<?php
-				/*
-				 * Serialize settings separately from the initial _wpCustomizeSettings
-				 * serialization in order to avoid a peak memory usage spike.
-				 * @todo We may not even need to export the values at all since the pane syncs them anyway.
-				 */
-				foreach ( $this->settings as $id => $setting ) {
-					if ( $setting->check_capabilities() ) {
-						printf(
-							"v[%s] = %s;\n",
-							wp_json_encode( $id ),
-							wp_json_encode( $setting->js_value() )
-						);
-					}
-				}
-				?>
+				$js_wpCustomizeSettings_values;
 			})( _wpCustomizeSettings.values );
-		</script>
-		<?php
+JS;
+			
+			inline_js( $js );
 	}
 
 	/**
@@ -4934,42 +4931,40 @@ final class WP_Customize_Manager {
 			}
 		}
 
-		?>
-		<script type="text/javascript">
-			var _wpCustomizeSettings = <?php echo wp_json_encode( $settings ); ?>;
+		$js_wpCustomizeSettings =  wp_json_encode( $settings );
+		$js = <<<JS
+			var _wpCustomizeSettings = $js_wpCustomizeSettings;
 			_wpCustomizeSettings.initialClientTimestamp = _.now();
 			_wpCustomizeSettings.controls = {};
 			_wpCustomizeSettings.settings = {};
-			<?php
-
+JS;
 			// Serialize settings one by one to improve memory usage.
-			echo "(function ( s ){\n";
-			foreach ( $this->settings() as $setting ) {
-				if ( $setting->check_capabilities() ) {
-					printf(
-						"s[%s] = %s;\n",
-						wp_json_encode( $setting->id ),
-						wp_json_encode( $setting->json() )
-					);
-				}
+		$js .= "(function ( s ){\n";
+		foreach ( $this->settings() as $setting ) {
+			if ( $setting->check_capabilities() ) {
+				$js .= sprintf(
+					"s[%s] = %s;\n",
+					wp_json_encode( $setting->id ),
+					wp_json_encode( $setting->json() )
+				);
 			}
-			echo "})( _wpCustomizeSettings.settings );\n";
+		}
+		$js .= "})( _wpCustomizeSettings.settings );\n";
 
-			// Serialize controls one by one to improve memory usage.
-			echo "(function ( c ){\n";
-			foreach ( $this->controls() as $control ) {
-				if ( $control->check_capabilities() ) {
-					printf(
-						"c[%s] = %s;\n",
-						wp_json_encode( $control->id ),
-						wp_json_encode( $control->json() )
-					);
-				}
+		// Serialize controls one by one to improve memory usage.
+		$js .= "(function ( c ){\n";
+		foreach ( $this->controls() as $control ) {
+			if ( $control->check_capabilities() ) {
+				$js .= sprintf(
+					"c[%s] = %s;\n",
+					wp_json_encode( $control->id ),
+					wp_json_encode( $control->json() )
+				);
 			}
-			echo "})( _wpCustomizeSettings.controls );\n";
-			?>
-		</script>
-		<?php
+		}
+		$js .= "})( _wpCustomizeSettings.controls );\n";
+	
+		inline_js( $js );
 	}
 
 	/**

@@ -60,11 +60,12 @@ if ( $wp_customize->changeset_post_id() ) {
 		);
 		ob_start();
 		?>
-		<?php wp_print_scripts( array( 'wp-util' ) ); ?>
-		<script>
-			wp.ajax.post( 'customize_save', <?php echo wp_json_encode( $request_args ); ?> );
-		</script>
-		<?php
+		<?php wp_print_scripts( array( 'wp-util' ) ); 
+		
+		$js = 'wp.ajax.post( "customize_save", ' . wp_json_encode( $request_args ) . ' );';
+		
+		inline_js( $js );
+
 		$script = ob_get_clean();
 
 		wp_die(
@@ -148,13 +149,16 @@ $admin_title = sprintf( $wp_customize->get_document_title_template(), __( 'Loadi
 
 ?>
 <title><?php echo esc_html( $admin_title ); ?></title>
-
-<script type="text/javascript">
-var ajaxurl = <?php echo wp_json_encode( admin_url( 'admin-ajax.php', 'relative' ) ); ?>,
-	pagenow = 'customize';
-</script>
-
 <?php
+
+$wp_json_encoded = wp_json_encode( admin_url( 'admin-ajax.php', 'relative' ) );
+$js = <<<JS
+var ajaxurl = $wp_json_encoded,
+	pagenow = 'customize';
+JS;
+
+inline_js( $js );
+
 /**
  * Fires when Customizer control styles are printed.
  *
