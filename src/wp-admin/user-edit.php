@@ -781,11 +781,12 @@ endif;
 		<?php
 		break;
 }
-?>
-<script type="text/javascript">
+
+$js = <<<JS
 	if (window.location.hash == '#password') {
 		document.getElementById('pass1').focus();
 	}
-</script>
-<?php
+JS;
+inline_js( $js, array( 'type' => 'text/javascript' ) );
+
 require_once ABSPATH . 'wp-admin/admin-footer.php';

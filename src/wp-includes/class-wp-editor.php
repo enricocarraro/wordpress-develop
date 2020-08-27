@@ -1632,7 +1632,7 @@ JS;
 
 				// This script is not filtered, needs to be added to some queue, but which one?
 				$wp_scripts = wp_scripts();
-				$wp_scripts->add( 'wp-langs-en',"$baseurl/langs/wp-langs-en.js?$version" );
+				$wp_scripts->add( 'wp-langs-en', "$baseurl/langs/wp-langs-en.js?$version" );
 				$wp_scripts->enqueue( 'wp-langs-en' );
 				$wp_scripts->print_scripts( 'wp-langs-en' );
 			}

@@ -650,10 +650,9 @@ if ( $can_edit_terms ) {
 </div><!-- /wrap -->
 
 <?php
-if ( ! wp_is_mobile() ) : 
-	$js = 'try{document.forms.addtag["tag-name"].focus();}catch(e){}';
-	inline_js( $js );
-endif;
+if ( ! wp_is_mobile() ) {
+	inline_js( 'try{document.forms.addtag["tag-name"].focus();}catch(e){}', array( 'type' => 'text/javascript' ) );
+}
 
 $wp_list_table->inline_edit();
 

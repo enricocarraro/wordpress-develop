@@ -268,12 +268,10 @@ function _cleanup_image_add_caption( $matches ) {
  * @param string $html
  */
 function media_send_to_editor( $html ) {
-	?>
-	<script type="text/javascript">
-	var win = window.dialogArguments || opener || parent || top;
-	win.send_to_editor( <?php echo wp_json_encode( $html ); ?> );
-	</script>
-	<?php
+	$js = 'var win = window.dialogArguments || opener || parent || top;';
+	$js .= 'win.send_to_editor( ' . wp_json_encode( $html ) . ' );';
+	inline_js( $js, array( 'type' => 'text/javascript' ) );
+
 	exit;
 }
 
@@ -2037,7 +2035,7 @@ function get_compat_media_markup( $attachment_id, $args = null ) {
 function media_upload_header() {
 	$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
 
-	echo '<script type="text/javascript">post_id = ' . $post_id . ';</script>';
+	inline_js( "post_id = $post_id;", array( 'type' => 'text/javascript' ) );
 
 	if ( empty( $_GET['chromeless'] ) ) {
 		echo '<div id="media-upload-header">';

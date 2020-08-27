@@ -284,9 +284,7 @@ do_action( "{$taxonomy}_edit_form", $tag, $taxonomy );
 </form>
 </div>
 
-<?php if ( ! wp_is_mobile() ) : ?>
-<script type="text/javascript">
-try{document.forms.edittag.name.focus();}catch(e){}
-</script>
-	<?php
-endif;
+<?php 
+if ( ! wp_is_mobile() ) {
+	inline_js( 'try{document.forms.edittag.name.focus();}catch(e){}', array( 'type' => 'text/javascript' ) );
+}
