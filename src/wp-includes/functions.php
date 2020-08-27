@@ -7657,7 +7657,7 @@ function inline_js( $javascript, $attributes = array(), $echo = true ) {
 				$attributes_string .= ' ' . $attribute_value;
 			}
 		} else {
-			$attributes_string .= sprintf( ' %s="%s"', $attribute_name, esc_attr( $attribute_value ) );
+			$attributes_string .= sprintf( " %s='%s'", $attribute_name, esc_attr( $attribute_value ) );
 		}
 	}
 	
