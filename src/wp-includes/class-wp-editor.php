@@ -1631,7 +1631,10 @@ JS;
 				// Load the old-format English strings to prevent unsightly labels in old style popups.
 
 				// This script is not filtered, needs to be added to some queue, but which one?
-				echo "<script type='text/javascript' src='{$baseurl}/langs/wp-langs-en.js?$version'></script>\n";
+				$wp_scripts = wp_scripts();
+				$wp_scripts->add( 'wp-langs-en',"$baseurl/langs/wp-langs-en.js?$version" );
+				$wp_scripts->enqueue( 'wp-langs-en' );
+				$wp_scripts->print_scripts( 'wp-langs-en' );
 			}
 		}
 
