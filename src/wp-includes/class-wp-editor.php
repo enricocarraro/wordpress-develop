@@ -1614,15 +1614,12 @@ JS;
 		if ( self::$drag_drop_upload ) {
 				$js .= 'dragDropUpload: true,';
 		}
-		$js_parse_int = self::_parse_init( $ref );
 
-		$js .= <<<JS
-			mceInit: $mceInit,
-			qtInit: $qtInit,
-			ref: $js_parse_int,
-			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
-		};		
-JS;
+		$js .= 'mceInit: ' . $mceInit . ',
+			qtInit: ' . $qtInit . ',
+			ref: ' . self::_parse_init( $ref ) . ',
+			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+"/langs/"+lang+".js");sl.markDone(url+"/langs/"+lang+"_dlg.js");}
+		};';
 		wp_inline_script( $js );
 
 		if ( $tmce_on ) {

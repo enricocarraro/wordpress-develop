@@ -502,7 +502,7 @@ JS;
 		wp_localize_script( 'test-example', 'testExample', array( 'foo' => 'bar' ) );
 		wp_add_inline_script( 'test-example', 'console.log("before");', 'before' );
 		wp_add_inline_script( 'test-example', 'console.log("after");' );
-		
+
 		$expected  = "<script id=\"test-example-js-extra\" type=\"text/javascript\">\n/* <![CDATA[ */\nvar testExample = {\"foo\":\"bar\"};\n/* ]]> */\n</script>\n";
 		$expected .= "<script id=\"test-example-js-before\" type=\"text/javascript\">\nconsole.log(\"before\");\n</script>\n";
 		$expected .= "<script type='text/javascript' src='http://example.com' id='test-example-js'></script>\n";
