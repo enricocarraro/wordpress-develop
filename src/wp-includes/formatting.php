@@ -5722,7 +5722,6 @@ function _print_emoji_detection_script() {
 	);
 
 	$version   = 'ver=' . get_bloginfo( 'version' );
-	
 
 	if ( SCRIPT_DEBUG ) {
 		$settings['source'] = array(

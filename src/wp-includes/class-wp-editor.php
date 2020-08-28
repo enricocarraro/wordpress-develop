@@ -984,8 +984,8 @@ JS;
 
 			$js .= <<<JS
 			var tinyMCEPreInit = {
-				baseURL: "$baseurl",
-				suffix: "$suffix",
+				baseURL: '$baseurl',
+				suffix: '$suffix',
 				mceInit: {},
 				qtInit: {},
 				load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
