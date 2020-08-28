@@ -114,9 +114,6 @@ if ( function_exists( 'get_site_option' ) ) {
 ?>
 
 <div class="clear"></div></div><!-- wpwrap -->
-<?php 
-$js = 'if(typeof wpOnload=="function")wpOnload();';
-inline_js( $js );
-?>
+<?php wp_inline_script( 'if(typeof wpOnload=="function")wpOnload();' ); ?>
 </body>
 </html>

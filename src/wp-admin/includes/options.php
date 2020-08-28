@@ -22,7 +22,7 @@ function options_discussion_add_js() {
 		});
 	})(jQuery);
 JS;
-	inline_js( $js );
+	wp_inline_script( $js );
 }
 
 /**
@@ -98,7 +98,7 @@ JS;
 		});
 	});
 JS;
-	inline_js( $js, array( 'type' => 'text/javascript' ) );
+	wp_inline_script( $js, array( 'type' => 'text/javascript' ) );
 }
 
 /**
@@ -119,7 +119,7 @@ function options_reading_add_js() {
 		section.find( 'input:radio' ).change( check_disabled );
 	});
 JS;
-	inline_js( $js );
+	wp_inline_script( $js );
 }
 
 /**

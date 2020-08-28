@@ -74,10 +74,10 @@ if ( get_user_setting( 'uploader' ) || isset( $_GET['browser-uploader'] ) ) {
 
 	<form enctype="multipart/form-data" method="post" action="<?php echo admin_url( 'media-new.php' ); ?>" class="<?php echo esc_attr( $form_class ); ?>" id="file-form">
 
-	<?php 
-	media_upload_form(); 
+	<?php
+	media_upload_form();
 
-	inline_js( "var post_id = $post_id, shortform = 3;" );
+	wp_inline_script( "var post_id = $post_id, shortform = 3;" );
 	?>
 	<input type="hidden" name="post_id" id="post_id" value="<?php echo $post_id; ?>" />
 	<?php wp_nonce_field( 'media-form' ); ?>

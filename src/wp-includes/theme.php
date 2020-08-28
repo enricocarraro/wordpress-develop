@@ -3540,8 +3540,8 @@ function wp_customize_support_script() {
 	$admin_origin = parse_url( admin_url() );
 	$home_origin  = parse_url( home_url() );
 	$cross_domain = ( strtolower( $admin_origin['host'] ) != strtolower( $home_origin['host'] ) );
-	$type_attr = current_theme_supports( 'html5', 'style' ) ? array() : array('type' => 'text/javascript');
-	$js = <<<JS
+	$type_attr    = current_theme_supports( 'html5', 'style' ) ? array() : array( 'type' => 'text/javascript' );
+	$js           = <<<JS
 		(function() {
 			var request, b = document.body, c = 'className', cs = 'customize-support', rcs = new RegExp('(^|\\s+)(no-)?'+cs+'(\\s+|$)');
 JS;
@@ -3551,14 +3551,14 @@ JS;
 	} else {
 		$js .= "request = true;\n";
 	}
-	
+
 	$js .= <<<JS
 			b[c] = b[c].replace( rcs, ' ' );
 			// The customizer requires postMessage and CORS (if the site is cross domain).
 			b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
 		}());
 JS;
-	inline_js( $js, $type_attr );
+	wp_inline_script( $js, $type_attr );
 }
 
 /**

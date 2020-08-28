@@ -2188,11 +2188,11 @@ final class WP_Customize_Manager {
 			}
 		}
 
-		$js_wpCustomizeSettings = wp_json_encode( $settings );
-		$js_wpCustomizeSettings_values = '';
+		$js_wp_customize_settings        = wp_json_encode( $settings );
+		$js_wp_customize_settings_values = '';
 		foreach ( $this->settings as $id => $setting ) {
 			if ( $setting->check_capabilities() ) {
-				$js_wpCustomizeSettings_values .= sprintf(
+				$js_wp_customize_settings_values .= sprintf(
 					"v[%s] = %s;\n",
 					wp_json_encode( $id ),
 					wp_json_encode( $setting->js_value() )
@@ -2201,14 +2201,14 @@ final class WP_Customize_Manager {
 		}
 
 		$js = <<<JS
-			var _wpCustomizeSettings = $js_wpCustomizeSettings;
+			var _wpCustomizeSettings = $js_wp_customize_settings;
 			_wpCustomizeSettings.values = {};
 			(function( v ) {
-				$js_wpCustomizeSettings_values;
+				$js_wp_customize_settings_values;
 			})( _wpCustomizeSettings.values );
 JS;
-			
-			inline_js( $js );
+
+			wp_inline_script( $js );
 	}
 
 	/**
@@ -4931,9 +4931,9 @@ JS;
 			}
 		}
 
-		$js_wpCustomizeSettings =  wp_json_encode( $settings );
-		$js = <<<JS
-			var _wpCustomizeSettings = $js_wpCustomizeSettings;
+		$js_wp_customize_settings = wp_json_encode( $settings );
+		$js                       = <<<JS
+			var _wpCustomizeSettings = $js_wp_customize_settings;
 			_wpCustomizeSettings.initialClientTimestamp = _.now();
 			_wpCustomizeSettings.controls = {};
 			_wpCustomizeSettings.settings = {};
@@ -4963,8 +4963,8 @@ JS;
 			}
 		}
 		$js .= "})( _wpCustomizeSettings.controls );\n";
-	
-		inline_js( $js );
+
+		wp_inline_script( $js );
 	}
 
 	/**

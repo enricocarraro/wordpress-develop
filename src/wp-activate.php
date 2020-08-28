@@ -213,7 +213,6 @@ $blog_details = get_blog_details();
 	</div>
 </div>
 <?php
-$js = "var key_input = document.getElementById('key');\n";
-$js .= 'key_input && key_input.focus();';
-inline_js( $js );
+
+wp_inline_script( "var key_input = document.getElementById('key');\nkey_input && key_input.focus();" );
 get_footer( 'wp-activate' );

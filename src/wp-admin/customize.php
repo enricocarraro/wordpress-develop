@@ -61,11 +61,11 @@ if ( $wp_customize->changeset_post_id() ) {
 		ob_start();
 		?>
 		<?php
-		wp_print_scripts( array( 'wp-util' ) ); 
-		
+		wp_print_scripts( array( 'wp-util' ) );
+
 		$js = 'wp.ajax.post( "customize_save", ' . wp_json_encode( $request_args ) . ' );';
-		
-		inline_js( $js );
+
+		wp_inline_script( $js );
 
 		$script = ob_get_clean();
 
@@ -153,12 +153,12 @@ $admin_title = sprintf( $wp_customize->get_document_title_template(), __( 'Loadi
 <?php
 
 $wp_json_encoded = wp_json_encode( admin_url( 'admin-ajax.php', 'relative' ) );
-$js = <<<JS
+$js              = <<<JS
 var ajaxurl = $wp_json_encoded,
 	pagenow = 'customize';
 JS;
 
-inline_js( $js );
+wp_inline_script( $js );
 
 /**
  * Fires when Customizer control styles are printed.

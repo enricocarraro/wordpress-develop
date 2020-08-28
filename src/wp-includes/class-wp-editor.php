@@ -981,7 +981,7 @@ JS;
 		if ( $user_can_richedit ) {
 			$suffix  = SCRIPT_DEBUG ? '' : '.min';
 			$baseurl = self::get_baseurl();
-			
+
 			$js .= <<<JS
 			var tinyMCEPreInit = {
 				baseURL: "$baseurl",
@@ -990,9 +990,9 @@ JS;
 				qtInit: {},
 				load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
 			};	
-JS;			
+JS;
 		}
-		inline_js( $js );
+		wp_inline_script( $js );
 
 		if ( $user_can_richedit ) {
 			self::print_tinymce_scripts();
@@ -1548,7 +1548,7 @@ JS;
 
 		wp_print_scripts( array( 'wp-tinymce' ) );
 
-		inline_js( self::wp_mce_translation() );
+		wp_inline_script( self::wp_mce_translation() );
 	}
 
 	/**
@@ -1622,7 +1622,7 @@ JS;
 			load_ext: function(url,lang){var sl=tinymce.ScriptLoader;sl.markDone(url+'/langs/'+lang+'.js');sl.markDone(url+'/langs/'+lang+'_dlg.js');}
 		};		
 JS;
-		inline_js( $js );
+		wp_inline_script( $js );
 
 		if ( $tmce_on ) {
 			self::print_tinymce_scripts();
@@ -1692,7 +1692,7 @@ JS;
 			}
 		}());
 JS;
-		inline_js( $js );
+		wp_inline_script( $js );
 
 		if ( in_array( 'wplink', self::$plugins, true ) || in_array( 'link', self::$qt_buttons, true ) ) {
 			self::wp_link_dialog();

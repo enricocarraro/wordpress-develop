@@ -233,10 +233,13 @@ class WP_Scripts extends WP_Dependencies {
 			$js = "/* <![CDATA[ */\n$js\n/* ]]> */";
 		}
 
-		inline_js( $js, array(
-			$this->type_attr,
-			'id' => "$handle-js-extra",
-		));
+		wp_inline_script(
+			$js,
+			array(
+				$this->type_attr,
+				'id' => "$handle-js-extra",
+			)
+		);
 
 		return true;
 	}
@@ -294,22 +297,22 @@ class WP_Scripts extends WP_Dependencies {
 		$after_handle  = $this->print_inline_script( $handle, 'after', false );
 
 		if ( $before_handle ) {
-			$before_handle = inline_js(
+			$before_handle = wp_inline_script(
 				$before_handle,
 				array(
 					$this->type_attr,
-					'id' => "$handle-js-before"
+					'id' => "$handle-js-before",
 				),
 				false
 			);
 		}
 
 		if ( $after_handle ) {
-			$after_handle = inline_js(
+			$after_handle = wp_inline_script(
 				$after_handle,
 				array(
 					$this->type_attr,
-					'id' => "$handle-js-after"
+					'id' => "$handle-js-after",
 				),
 				false
 			);
@@ -376,11 +379,11 @@ class WP_Scripts extends WP_Dependencies {
 
 		$translations = $this->print_translations( $handle, false );
 		if ( $translations ) {
-			$translations = inline_js(
+			$translations = wp_inline_script(
 				$translations,
 				array(
 					$this->type_attr,
-					'id' => "$handle-js-translations"
+					'id' => "$handle-js-translations",
 				),
 				false
 			);
@@ -475,10 +478,13 @@ class WP_Scripts extends WP_Dependencies {
 		$output = trim( implode( "\n", $output ), "\n" );
 
 		if ( $echo ) {
-			inline_js( $output,	array(
-				$this->type_attr,
-				'id' => "$handle-js-$position"
-			));
+			wp_inline_script(
+				$output,
+				array(
+					$this->type_attr,
+					'id' => "$handle-js-$position",
+				)
+			);
 		}
 
 		return $output;
@@ -615,10 +621,13 @@ class WP_Scripts extends WP_Dependencies {
 JS;
 
 		if ( $echo ) {
-			inline_js( $output,	array(
-				$this->type_attr,
-				'id' => "$handle-js-translations"
-			));			
+			wp_inline_script(
+				$output,
+				array(
+					$this->type_attr,
+					'id' => "$handle-js-translations",
+				)
+			);
 		}
 
 		return $output;

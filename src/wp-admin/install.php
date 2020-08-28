@@ -445,7 +445,7 @@ switch ( $step ) {
 
 if ( ! wp_is_mobile() ) {
 	$js = 'var t = document.getElementById("weblog_title"); if (t){ t.focus(); }';
-	inline_js( $js );
+	wp_inline_script( $js );
 }
 
 wp_print_scripts( $scripts_to_print );
@@ -456,7 +456,7 @@ jQuery( function( $ ) {
 } );
 JS;
 
-inline_js( $js );
+wp_inline_script( $js );
 
 ?>
 </body>

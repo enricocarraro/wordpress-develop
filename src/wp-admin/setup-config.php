@@ -426,7 +426,7 @@ if ( ! /iPad|iPod|iPhone/.test( navigator.userAgent ) ) {
 }
 })();
 JS;
-			inline_js( $js );
+			wp_inline_script( $js );
 	else :
 		/*
 		 * If this file doesn't exist, then we are using the wp-config-sample.php

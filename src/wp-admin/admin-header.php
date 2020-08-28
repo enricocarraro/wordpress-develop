@@ -80,16 +80,16 @@ wp_enqueue_script( 'svg-painter' );
 
 $admin_body_class = preg_replace( '/[^a-z0-9_-]+/i', '-', $hook_suffix );
 
-$js = 'addLoadEvent = function(func){if(typeof jQuery!=="undefined")jQuery(document).ready(func);else if(typeof wpOnload!=="function"){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};';
-$js .= 'var ajaxurl = "' . admin_url( 'admin-ajax.php', 'relative' ) . '",';
-$js .= "pagenow = '$current_screen->id',";
-$js .= "typenow = '$current_screen->post_type',";
-$js .= "adminpage = '$admin_body_class',";
-$js .= 'thousandsSeparator = "' . addslashes( $wp_locale->number_format['thousands_sep'] ) . '",';
-$js .= 'decimalPoint = "' . addslashes( $wp_locale->number_format['decimal_point'] ) . '",';
-$js .= 'isRtl = ' . ((int) is_rtl()) . ';';
+$js = 'addLoadEvent = function(func){if(typeof jQuery!=="undefined")jQuery(document).ready(func);else if(typeof wpOnload!=="function"){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};
+	var ajaxurl = "' . admin_url( 'admin-ajax.php', 'relative' ) . '",
+	pagenow = "' . $current_screen->id . '",
+	typenow = "' . $current_screen->post_type . '",
+	adminpage = "' . $admin_body_class . '",
+	thousandsSeparator = "' . addslashes( $wp_locale->number_format['thousands_sep'] ) . '",
+	decimalPoint = "' . addslashes( $wp_locale->number_format['decimal_point'] ) . '",
+	isRtl = ' . ( (int) is_rtl() ) . ';';
 
-inline_js( $js );
+wp_inline_script( $js );
 
 /**
  * Enqueue scripts for all admin pages.
@@ -233,8 +233,7 @@ $admin_body_classes = ltrim( $admin_body_classes . ' ' . $admin_body_class );
 <body class="wp-admin wp-core-ui no-js <?php echo $admin_body_classes; ?>">
 <?php
 
-$js = 'document.body.className = document.body.className.replace("no-js","js");';	
-inline_js( $js );
+wp_inline_script( 'document.body.className = document.body.className.replace("no-js","js");' );
 
 // Make sure the customize body classes are correct as early as possible.
 if ( current_user_can( 'customize' ) ) {

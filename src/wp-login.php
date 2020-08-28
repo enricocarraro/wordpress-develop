@@ -101,7 +101,7 @@ function login_header( $title = 'Log In', $message = '', $wp_error = null ) {
 	 */
 	if ( 'loggedout' === $wp_error->get_error_code() ) {
 		$js = 'if("sessionStorage" in window){try{for(var key in sessionStorage){if(key.indexOf("wp-autosave-")!=-1){sessionStorage.removeItem(key)}}}catch(e){}};';
-		inline_js( $js );
+		wp_inline_script( $js );
 	}
 
 	/**
@@ -192,10 +192,10 @@ function login_header( $title = 'Log In', $message = '', $wp_error = null ) {
 	</head>
 	<body class="login no-js <?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 	<?php
-	
+
 	$js = 'document.body.className = document.body.className.replace("no-js", "js");';
-	inline_js( $js );
-	
+	wp_inline_script( $js );
+
 	/**
 	 * Fires in the login page header after the body tag is opened.
 	 *
@@ -304,7 +304,7 @@ function login_footer( $input_id = '' ) {
 try{document.getElementById('$input_id').focus();}catch(e){}
 if(typeof wpOnload=='function')wpOnload();
 JS;
-		inline_js( $js );
+		wp_inline_script( $js );
 	}
 
 	/**
@@ -328,7 +328,7 @@ JS;
  */
 function wp_shake_js() {
 	$js = 'document.querySelector("form").classList.add("shake");';
-	inline_js( $js );
+	wp_inline_script( $js );
 }
 
 /**
@@ -1294,7 +1294,7 @@ switch ( $action ) {
 
 				if ( $customize_login ) {
 					$js = "setTimeout( function(){ new wp.customize.Messenger({ url: '" . wp_customize_url() . "', channel: 'login' }).send('login') }, 1000 );";
-					inline_js( $js );
+					wp_inline_script( $js );
 				}
 
 				?>
@@ -1506,8 +1506,8 @@ switch ( $action ) {
 
 		// Run `wpOnload()` if defined.
 		$login_script .= "if ( typeof wpOnload === 'function' ) { wpOnload() }";
-		
-		inline_js( $login_script );
+
+		wp_inline_script( $login_script );
 
 		if ( $interim_login ) {
 			$js = <<<JS
@@ -1523,7 +1523,7 @@ switch ( $action ) {
 	} catch( er ) {}
 }());
 JS;
-			inline_js( $js );
+			wp_inline_script( $js );
 		}
 
 		login_footer();

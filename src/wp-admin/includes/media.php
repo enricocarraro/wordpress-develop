@@ -268,9 +268,9 @@ function _cleanup_image_add_caption( $matches ) {
  * @param string $html
  */
 function media_send_to_editor( $html ) {
-	$js = 'var win = window.dialogArguments || opener || parent || top;';
+	$js  = 'var win = window.dialogArguments || opener || parent || top;';
 	$js .= 'win.send_to_editor( ' . wp_json_encode( $html ) . ' );';
-	inline_js( $js, array( 'type' => 'text/javascript' ) );
+	wp_inline_script( $js, array( 'type' => 'text/javascript' ) );
 
 	exit;
 }
@@ -2035,7 +2035,7 @@ function get_compat_media_markup( $attachment_id, $args = null ) {
 function media_upload_header() {
 	$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
 
-	inline_js( "post_id = $post_id;", array( 'type' => 'text/javascript' ) );
+	wp_inline_script( "post_id = $post_id;", array( 'type' => 'text/javascript' ) );
 
 	if ( empty( $_GET['chromeless'] ) ) {
 		echo '<div id="media-upload-header">';
@@ -2170,7 +2170,6 @@ function media_upload_form( $errors = null ) {
 	 */
 	$plupload_init = apply_filters( 'plupload_init', $plupload_init );
 
-	
 	// Verify size is an int. If not return default value.
 	$large_size_h = absint( get_option( 'large_size_h' ) );
 
@@ -2183,10 +2182,10 @@ function media_upload_form( $errors = null ) {
 	if ( ! $large_size_w ) {
 		$large_size_w = 1024;
 	}
-	
-	$js = "var resize_height = $large_size_h, resize_width = $large_size_w,\n";
+
+	$js  = "var resize_height = $large_size_h, resize_width = $large_size_w,\n";
 	$js .= 'wpUploaderInit = ' . wp_json_encode( $plupload_init ) . ';';
-	inline_js( $js );
+	wp_inline_script( $js );
 
 	?>
 	<div id="plupload-upload-ui" class="hide-if-no-js">

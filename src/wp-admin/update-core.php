@@ -198,7 +198,7 @@ function dismissed_updates() {
 
 		$show_text = esc_js( __( 'Show hidden updates' ) );
 		$hide_text = esc_js( __( 'Hide hidden updates' ) );
-		
+
 		$js = <<<JS
 		jQuery(function( $ ) {
 			$( 'dismissed-updates' ).show();
@@ -206,7 +206,7 @@ function dismissed_updates() {
 			$( '#show-dismissed' ).click( function() { $( '#dismissed-updates' ).toggle( 'fast' ); } );
 		});
 JS;
-		inline_js( $js );
+		wp_inline_script( $js );
 
 		echo '<p class="hide-if-no-js"><button type="button" class="button" id="show-dismissed" aria-expanded="false">' . __( 'Show hidden updates' ) . '</button></p>';
 		echo '<ul id="dismissed-updates" class="core-updates dismissed">';
@@ -753,8 +753,8 @@ function do_core_upgrade( $reinstall = false ) {
 		) . '</span>'
 	);
 
-	$js = sprintf('window.location = "%s";', self_admin_url( 'about.php?updated' ) );
-	inline_js( $js, array( 'type' => 'text/javascript' ) );
+	$js = sprintf( 'window.location = "%s";', self_admin_url( 'about.php?updated' ) );
+	wp_inline_script( $js, array( 'type' => 'text/javascript' ) );
 	?>
 	</div>
 	<?php

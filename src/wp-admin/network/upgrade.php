@@ -132,7 +132,7 @@ switch ( $action ) {
 		setTimeout( "nextpage()", 250 );
 		//-->
 JS;
-		inline_js( $js );
+		wp_inline_script( $js );
 		break;
 	case 'show':
 	default:

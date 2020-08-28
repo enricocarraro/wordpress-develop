@@ -7630,7 +7630,7 @@ function is_php_version_compatible( $required ) {
  * @param int|float $expected  The expected value.
  * @param int|float $actual    The actual number.
  * @param int|float $precision The allowed variation.
- * @return bool Whether the numbers match whithin the specified precision.
+ * @return bool	Whether the numbers match whithin the specified precision.
  */
 function wp_fuzzy_number_match( $expected, $actual, $precision = 1 ) {
 	return abs( (float) $expected - (float) $actual ) <= $precision;
@@ -7643,31 +7643,31 @@ function wp_fuzzy_number_match( $expected, $actual, $precision = 1 ) {
  *
  * @param string	$javascript Inline JavaScript code.
  * @param array		$attributes Optional. <script> tag attributes.
- * @param bool		$echo 		Optional. Prints to the page is true, returns the value otherwise.	
- * @return string|null			Inline JavaScript code wrapped around <script> tags if $echo is true, null otherwise.
+ * @param bool		$echo       Optional. Prints to the page is true, returns the value otherwise.
+ * @return string|null	Inline JavaScript code wrapped around <script> tags if $echo is true, null otherwise.
  */
-function inline_js( $javascript, $attributes = array(), $echo = true ) {
+function wp_inline_script( $javascript, $attributes = array(), $echo = true ) {
 	$attributes_string = '';
 
 	// $attributes entries without key are added to $attributes_string without the `=`,
 	// these elements will not be escaped.
 	foreach ( $attributes as $attribute_name => $attribute_value ) {
-		if ( is_int( $attribute_name )) {
-			if ( is_string( $attribute_value ) && $attribute_value !== '' ) {
+		if ( is_int( $attribute_name ) ) {
+			if ( is_string( $attribute_value ) && '' !== $attribute_value ) {
 				$attributes_string .= ' ' . $attribute_value;
 			}
 		} else {
-			$attributes_string .= sprintf( " %s='%s'", $attribute_name, esc_attr( $attribute_value ) );
+			$attributes_string .= sprintf( ' %s="%s"', $attribute_name, esc_attr( $attribute_value ) );
 		}
 	}
-	
+
 	$attributes_string = trim( apply_filters( 'inline_script_attributes', $attributes_string ) );
-	if ( is_string( $attributes_string ) && $attributes_string !== '' && $attributes_string[0] !== ' ' ) {
+	if ( is_string( $attributes_string ) && '' !== $attributes_string ) {
 		$attributes_string = ' ' . $attributes_string;
 	}
-	
+
 	$output = sprintf( "<script%s>\n%s\n</script>\n", $attributes_string, $javascript );
-	
+
 	if ( $echo ) {
 		echo $output;
 	} else {

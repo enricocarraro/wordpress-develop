@@ -38,7 +38,7 @@ function export_add_js() {
 		});
 	});
 JS;
-	inline_js( $js );
+	wp_inline_script( $js );
 }
 add_action( 'admin_head', 'export_add_js' );
 
