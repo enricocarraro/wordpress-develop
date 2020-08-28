@@ -324,6 +324,11 @@ class WP_Scripts extends WP_Dependencies {
 			$inline_script_tag = '';
 		}
 
+		$translations = $this->print_translations( $handle, false );
+		if ( $translations ) {
+			$translations = sprintf( "<script%s id='%s-js-translations'>\n%s\n</script>\n", $this->type_attr, esc_attr( $handle ), $translations );
+		}
+
 		if ( $this->do_concat ) {
 			/**
 			 * Filters the script loader source.
@@ -335,7 +340,7 @@ class WP_Scripts extends WP_Dependencies {
 			 */
 			$srce = apply_filters( 'script_loader_src', $src, $handle );
 
-			if ( $this->in_default_dir( $srce ) && ( $before_handle || $after_handle ) ) {
+			if ( $this->in_default_dir( $srce ) && ( $before_handle || $after_handle || $translations ) ) {
 				$this->do_concat = false;
 
 				// Have to print the so-far concatenated scripts right away to maintain the right order.
@@ -376,7 +381,7 @@ class WP_Scripts extends WP_Dependencies {
 
 			return true;
 		}
-
+    
 		$translations = $this->print_translations( $handle, false );
 		if ( $translations ) {
 			$translations = wp_inline_script(
