@@ -31,12 +31,11 @@ JS;
  * @since 3.5.0
  */
 function options_general_add_js() {
-	$js = <<<'JS'
+	$js  = <<<'JS'
 	jQuery(document).ready(function($){
 		var $siteName = $( '#wp-admin-bar-site-name' ).children( 'a' ).first(),
 JS;
 	$js .= 'homeURL = ( ' . wp_json_encode( get_home_url() ) . ' || "" ).replace( /^(https?:\/\/)?(www\.)?/, "" );';
-
 	$js .= <<<'JS'
 		$( '#blogname' ).on( 'input', function() {
 			var title = $.trim( $( this ).val() ) || homeURL;
@@ -98,7 +97,7 @@ JS;
 		});
 	});
 JS;
-	wp_inline_script( $js, array( 'type' => 'text/javascript' ) );
+	wp_inline_script( $js );
 }
 
 /**

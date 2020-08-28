@@ -992,6 +992,7 @@ JS;
 			};	
 JS;
 		}
+
 		wp_inline_script( $js );
 
 		if ( $user_can_richedit ) {
@@ -1629,8 +1630,6 @@ JS;
 
 			if ( self::$ext_plugins ) {
 				// Load the old-format English strings to prevent unsightly labels in old style popups.
-
-				// This script is not filtered, needs to be added to some queue, but which one?
 				$wp_scripts = wp_scripts();
 				$wp_scripts->add( 'wp-langs-en', "$baseurl/langs/wp-langs-en.js?$version" );
 				$wp_scripts->enqueue( 'wp-langs-en' );

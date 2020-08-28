@@ -753,8 +753,7 @@ function do_core_upgrade( $reinstall = false ) {
 		) . '</span>'
 	);
 
-	$js = sprintf( 'window.location = "%s";', self_admin_url( 'about.php?updated' ) );
-	wp_inline_script( $js, array( 'type' => 'text/javascript' ) );
+		wp_inline_script( sprintf( 'window.location = "%s";', self_admin_url( 'about.php?updated' ) ) );
 	?>
 	</div>
 	<?php

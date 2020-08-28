@@ -286,5 +286,5 @@ do_action( "{$taxonomy}_edit_form", $tag, $taxonomy );
 
 <?php
 if ( ! wp_is_mobile() ) {
-	wp_inline_script( 'try{document.forms.edittag.name.focus();}catch(e){}', array( 'type' => 'text/javascript' ) );
+	wp_inline_script( 'try{document.forms.edittag.name.focus();}catch(e){}' );
 }

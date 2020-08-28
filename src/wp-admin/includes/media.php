@@ -268,9 +268,9 @@ function _cleanup_image_add_caption( $matches ) {
  * @param string $html
  */
 function media_send_to_editor( $html ) {
-	$js  = 'var win = window.dialogArguments || opener || parent || top;';
-	$js .= 'win.send_to_editor( ' . wp_json_encode( $html ) . ' );';
-	wp_inline_script( $js, array( 'type' => 'text/javascript' ) );
+	$js = 'var win = window.dialogArguments || opener || parent || top; 
+	win.send_to_editor( ' . wp_json_encode( $html ) . ' );';
+	wp_inline_script( $js );
 
 	exit;
 }
@@ -2035,7 +2035,7 @@ function get_compat_media_markup( $attachment_id, $args = null ) {
 function media_upload_header() {
 	$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
 
-	wp_inline_script( "post_id = $post_id;", array( 'type' => 'text/javascript' ) );
+	wp_inline_script( "post_id = $post_id;" );
 
 	if ( empty( $_GET['chromeless'] ) ) {
 		echo '<div id="media-upload-header">';

@@ -123,15 +123,12 @@ switch ( $action ) {
 		echo '</ul>';
 		?><p><?php _e( 'If your browser doesn&#8217;t start loading the next page automatically, click this link:' ); ?> <a class="button" href="upgrade.php?action=upgrade&amp;n=<?php echo ( $n + 5 ); ?>"><?php _e( 'Next Sites' ); ?></a></p>
 		<?php
-		$n_plus_5 = $n + 5;
-		$js = <<<JS
-		<!--
+		$js = '<!--
 		function nextpage() {
-			location.href = "upgrade.php?action=upgrade&n=$n_plus_5";
+			location.href = "upgrade.php?action=upgrade&n=' . $n + 5 . '";
 		}
 		setTimeout( "nextpage()", 250 );
-		//-->
-JS;
+		//-->';
 		wp_inline_script( $js );
 		break;
 	case 'show':

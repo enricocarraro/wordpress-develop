@@ -444,13 +444,12 @@ switch ( $step ) {
 }
 
 if ( ! wp_is_mobile() ) {
-	$js = 'var t = document.getElementById("weblog_title"); if (t){ t.focus(); }';
-	wp_inline_script( $js );
+	wp_inline_script( 'var t = document.getElementById("weblog_title"); if (t){ t.focus(); }' );
 }
 
 wp_print_scripts( $scripts_to_print );
 
-$js = <<<JS
+$js = <<<'JS'
 jQuery( function( $ ) {
 	$( '.hide-if-no-js' ).removeClass( 'hide-if-no-js' );
 } );

@@ -4962,7 +4962,7 @@ JS;
 				);
 			}
 		}
-		$js .= "})( _wpCustomizeSettings.controls );\n";
+		$js .= '})( _wpCustomizeSettings.controls );';
 
 		wp_inline_script( $js );
 	}
