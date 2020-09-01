@@ -227,19 +227,17 @@ class WP_Upgrader_Skin {
 		}
 
 		if ( defined( 'IFRAME_REQUEST' ) ) {
-			echo '<script type="text/javascript">
-					if ( window.postMessage && JSON ) {
+			$js = 'if ( window.postMessage && JSON ) {
 						window.parent.postMessage( JSON.stringify( { action: "decrementUpdateCount", upgradeType: "' . $type . '" } ), window.location.protocol + "//" + window.location.hostname );
-					}
-				</script>';
+					}';
+			wp_inline_script( $js );
 		} else {
-			echo '<script type="text/javascript">
-					(function( wp ) {
+			$js = '(function( wp ) {
 						if ( wp && wp.updates && wp.updates.decrementCount ) {
 							wp.updates.decrementCount( "' . $type . '" );
 						}
-					})( window.wp );
-				</script>';
+					})( window.wp );';
+			wp_inline_script( $js );
 		}
 	}
 

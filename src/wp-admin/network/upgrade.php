@@ -125,7 +125,7 @@ switch ( $action ) {
 		<?php
 		$js = '<!--
 		function nextpage() {
-			location.href = "upgrade.php?action=upgrade&n=' . $n + 5 . '";
+			location.href = "upgrade.php?action=upgrade&n=' . ( $n + 5 ) . '";
 		}
 		setTimeout( "nextpage()", 250 );
 		//-->';

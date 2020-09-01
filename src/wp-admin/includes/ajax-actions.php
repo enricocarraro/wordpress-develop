@@ -3739,7 +3739,7 @@ function wp_ajax_parse_embed() {
 			$script_src = includes_url( 'js/wp-embed.min.js' );
 		}
 
-		$return['head']    = '<script src="' . $script_src . '"></script>';
+		$return['head']    = wp_script( array( 'src' => $script_src ) );
 		$return['sandbox'] = true;
 	}
 

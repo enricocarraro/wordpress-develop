@@ -526,14 +526,12 @@ function wp_iframe( $content_func, ...$args ) {
 	) {
 		wp_enqueue_style( 'deprecated-media' );
 	}
+	$js = 'addLoadEvent = function(func){if(typeof jQuery!="undefined")jQuery(document).ready(func);else if(typeof wpOnload!="function"){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};
+	var ajaxurl = "' . admin_url( 'admin-ajax.php', 'relative' ) . '", pagenow = "media-upload-popup", adminpage = "media-upload-popup",
+	isRtl = <?php echo (int) is_rtl(); ?>;';
 
-	?>
-	<script type="text/javascript">
-	addLoadEvent = function(func){if(typeof jQuery!="undefined")jQuery(document).ready(func);else if(typeof wpOnload!='function'){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};
-	var ajaxurl = '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>', pagenow = 'media-upload-popup', adminpage = 'media-upload-popup',
-	isRtl = <?php echo (int) is_rtl(); ?>;
-	</script>
-	<?php
+	wp_inline_script( $js );
+
 	/** This action is documented in wp-admin/admin-header.php */
 	do_action( 'admin_enqueue_scripts', 'media-upload-popup' );
 
@@ -592,18 +590,18 @@ function wp_iframe( $content_func, ...$args ) {
 	?>
 	</head>
 	<body<?php echo $body_id_attr; ?> class="wp-core-ui no-js">
-	<script type="text/javascript">
-	document.body.className = document.body.className.replace('no-js', 'js');
-	</script>
 	<?php
+
+	wp_inline_script( 'document.body.className = document.body.className.replace("no-js", "js");' );
 
 	call_user_func_array( $content_func, $args );
 
 	/** This action is documented in wp-admin/admin-footer.php */
 	do_action( 'admin_print_footer_scripts' );
 
+	wp_inline_script( 'if(typeof wpOnload=="function")wpOnload();' );
+
 	?>
-	<script type="text/javascript">if(typeof wpOnload=='function')wpOnload();</script>
 	</body>
 	</html>
 	<?php
@@ -790,13 +788,9 @@ function media_upload_form_handler() {
 	}
 
 	if ( isset( $_POST['insert-gallery'] ) || isset( $_POST['update-gallery'] ) ) {
-		?>
-		<script type="text/javascript">
-		var win = window.dialogArguments || opener || parent || top;
-		win.tb_remove();
-		</script>
-		<?php
-
+		$js = 'var win = window.dialogArguments || opener || parent || top; 
+		win.tb_remove();';
+		wp_inline_script( $js );
 		exit;
 	}
 
@@ -2303,9 +2297,11 @@ function media_upload_type_form( $type = 'file', $errors = null, $id = null ) {
 
 	<h3 class="media-title"><?php _e( 'Add media files from your computer' ); ?></h3>
 
-	<?php media_upload_form( $errors ); ?>
+	<?php
 
-	<script type="text/javascript">
+	media_upload_form( $errors );
+
+	$js = <<<'JS'
 	jQuery(function($){
 		var preloaded = $(".media-item.preloaded");
 		if ( preloaded.length > 0 ) {
@@ -2313,7 +2309,10 @@ function media_upload_type_form( $type = 'file', $errors = null, $id = null ) {
 		}
 		updateMediaForm();
 	});
-	</script>
+JS;
+	wp_inline_script( $js );
+
+	?>
 	<div id="media-items">
 	<?php
 
@@ -2371,7 +2370,8 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 
 	<h3 class="media-title"><?php _e( 'Insert media from another website' ); ?></h3>
 
-	<script type="text/javascript">
+	<?php
+	$js = <<<'JS'
 	var addExtImage = {
 
 	width : '',
@@ -2386,11 +2386,10 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 
 		if ( f.alt.value )
 			alt = f.alt.value.replace(/'/g, '&#039;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-		<?php
+JS;
 		/** This filter is documented in wp-admin/includes/media.php */
-		if ( ! apply_filters( 'disable_captions', '' ) ) {
-			?>
+	if ( ! apply_filters( 'disable_captions', '' ) ) {
+		$js .= <<<'JS'
 			if ( f.caption.value ) {
 				caption = f.caption.value.replace(/\r\n|\r/g, '\n');
 				caption = caption.replace(/<[a-zA-Z0-9]+( [^<>]+)?>/g, function(a){
@@ -2399,10 +2398,9 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 
 				caption = caption.replace(/\s*\n\s*/g, '<br />');
 			}
-			<?php
-		}
-
-		?>
+JS;
+	}
+		$js .= <<<'JS'
 		cls = caption ? '' : ' class="'+t.align+'"';
 
 		html = '<img alt="'+alt+'" src="'+f.src.value+'"'+cls+' width="'+t.width+'" height="'+t.height+'" />';
@@ -2427,7 +2425,9 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 		document.getElementById('go_button').style.color = '#bbb';
 		if ( ! document.forms[0].src.value )
 			document.getElementById('status_img').innerHTML = '';
-		else document.getElementById('status_img').innerHTML = '<img src="<?php echo esc_url( admin_url( 'images/no.png' ) ); ?>" alt="" />';
+JS;
+		$js .= 'else document.getElementById(\'status_img\').innerHTML = \'<img src="' . esc_url( admin_url( 'images/no.png' ) ) . '" alt="" />\';';
+		$js .= <<<'JS'
 	},
 
 	updateImageData : function() {
@@ -2436,7 +2436,9 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 		t.width = t.preloadImg.width;
 		t.height = t.preloadImg.height;
 		document.getElementById('go_button').style.color = '#333';
-		document.getElementById('status_img').innerHTML = '<img src="<?php echo esc_url( admin_url( 'images/yes.png' ) ); ?>" alt="" />';
+JS;
+		$js .= 'document.getElementById(\'status_img\').innerHTML = \'<img src="' . esc_url( admin_url( 'images/yes.png' ) ) . '" alt="" />\';';
+	$js     .= <<<'JS'
 	},
 
 	getImageData : function() {
@@ -2449,8 +2451,9 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 			t.resetImageData();
 			return false;
 		}
-
-		document.getElementById('status_img').innerHTML = '<img src="<?php echo esc_url( admin_url( 'images/spinner-2x.gif' ) ); ?>" alt="" width="16" height="16" />';
+JS;
+	$js     .= 'document.getElementById(\'status_img\').innerHTML = \'<img src="' . esc_url( admin_url( 'images/spinner-2x.gif' ) ) . '" alt="" width="16" height="16" />\';';
+	$js     .= <<<'JS'
 		t.preloadImg = new Image();
 		t.preloadImg.onload = t.updateImageData;
 		t.preloadImg.onerror = t.resetImageData;
@@ -2463,8 +2466,9 @@ function media_upload_type_url_form( $type = null, $errors = null, $id = null ) 
 			$('table.describe').toggleClass('not-image', $('#not-image').prop('checked') );
 		});
 	});
-	</script>
-
+JS;
+	wp_inline_script( $js );
+	?>
 	<div id="media-items">
 	<div class="media-item media-blank">
 	<?php
@@ -2511,8 +2515,7 @@ function media_upload_gallery_form( $errors ) {
 		$form_class .= ' html-uploader';
 	}
 
-	?>
-	<script type="text/javascript">
+	$js = <<<'JS'
 	jQuery(function($){
 		var preloaded = $(".media-item.preloaded");
 		if ( preloaded.length > 0 ) {
@@ -2520,7 +2523,10 @@ function media_upload_gallery_form( $errors ) {
 			updateMediaForm();
 		}
 	});
-	</script>
+JS;
+	wp_inline_script( $js );
+
+	?>
 	<div id="sort-buttons" class="hide-if-no-js">
 	<span>
 		<?php _e( 'All Tabs:' ); ?>
@@ -2836,9 +2842,10 @@ function media_upload_library_form( $errors ) {
 
 	<form enctype="multipart/form-data" method="post" action="<?php echo esc_url( $form_action_url ); ?>" class="<?php echo $form_class; ?>" id="library-form">
 	<?php wp_nonce_field( 'media-form' ); ?>
-	<?php // media_upload_form( $errors ); ?>
+	<?php
+	// media_upload_form( $errors );
 
-	<script type="text/javascript">
+	$js = <<<'JS'
 	jQuery(function($){
 		var preloaded = $(".media-item.preloaded");
 		if ( preloaded.length > 0 ) {
@@ -2846,8 +2853,9 @@ function media_upload_library_form( $errors ) {
 			updateMediaForm();
 		}
 	});
-	</script>
-
+JS;
+	wp_inline_script( $js );
+	?>
 	<div id="media-items">
 		<?php add_filter( 'attachment_fields_to_edit', 'media_post_single_attachment_fields_to_edit', 10, 2 ); ?>
 		<?php echo get_media_items( null, $errors ); ?>

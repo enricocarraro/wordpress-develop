@@ -1627,10 +1627,12 @@ JS;
 
 			if ( self::$ext_plugins ) {
 				// Load the old-format English strings to prevent unsightly labels in old style popups.
-				$wp_scripts = wp_scripts();
-				$wp_scripts->add( 'wp-langs-en', "$baseurl/langs/wp-langs-en.js?$version" );
-				$wp_scripts->enqueue( 'wp-langs-en' );
-				$wp_scripts->print_scripts( 'wp-langs-en' );
+				wp_script(
+					array(
+						'type' => 'text/javascript',
+						'src'  => "{$baseurl}/langs/wp-langs-en.js?$version",
+					)
+				);
 			}
 		}
 

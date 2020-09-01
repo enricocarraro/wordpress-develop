@@ -5721,7 +5721,7 @@ function _print_emoji_detection_script() {
 		'svgExt'  => apply_filters( 'emoji_svg_ext', '.svg' ),
 	);
 
-	$version   = 'ver=' . get_bloginfo( 'version' );
+	$version = 'ver=' . get_bloginfo( 'version' );
 
 	if ( SCRIPT_DEBUG ) {
 		$settings['source'] = array(
@@ -5750,7 +5750,7 @@ function _print_emoji_detection_script() {
 		 * minified JavaScript. If you need to debug it, please turn on SCRIPT_DEBUG
 		 * and edit wp-emoji-loader.js directly.
 		 */
-		$js  = 'window._wpemojiSettings = ' . wp_json_encode( $settings ) . ';
+		$js = 'window._wpemojiSettings = ' . wp_json_encode( $settings ) . ';
 		include "js/wp-emoji-loader.min.js"';
 		wp_inline_script( $js );
 	}
