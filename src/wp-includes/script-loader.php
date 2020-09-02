@@ -1926,7 +1926,7 @@ function _print_scripts() {
 	if ( ! empty( $wp_scripts->print_html ) ) {
 		echo $wp_scripts->print_html;
 	}
-}	
+}
 
 /**
  * Prints the script queue in the HTML head on the front end.
