@@ -632,7 +632,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src='/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery&amp;ver={$ver}' type='text/javascript'></script>\n";
+		$expected  = "<script src='/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}' type='text/javascript'></script>\n";
 		$expected .= "<script src='http://example.com' id='test-example-js' type='text/javascript'></script>\n";
 		$expected .= "<script id='test-example-js-after' type='text/javascript'>\nconsole.log(\"after\");\n</script>\n";
 
@@ -657,7 +657,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src='/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery&amp;ver={$ver}' type='text/javascript'></script>\n";
+		$expected  = "<script src='/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}' type='text/javascript'></script>\n";
 		$expected .= "<!--[if gte IE 9]>\n";
 		$expected .= "<script src='http://example.com' id='test-example-js' type='text/javascript'></script>\n";
 		$expected .= "<script id='test-example-js-after' type='text/javascript'>\nconsole.log(\"after\");\n</script>\n";
@@ -686,7 +686,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src='/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery&amp;ver={$ver}' type='text/javascript'></script>\n";
+		$expected  = "<script src='/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}' type='text/javascript'></script>\n";
 		$expected .= "<script id='test-example-js-before' type='text/javascript'>\nconsole.log(\"before\");\n</script>\n";
 		$expected .= "<script src='http://example.com' id='test-example-js' type='text/javascript'></script>\n";
 
@@ -712,12 +712,12 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src='/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery&amp;ver={$ver}' type='text/javascript'></script>\n";
+		$expected  = "<script src='/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}' type='text/javascript'></script>\n";
 		$expected .= "<script id='test-example-js-before' type='text/javascript'>\nconsole.log(\"before\");\n</script>\n";
 		$expected .= "<script src='http://example.com' id='test-example-js' type='text/javascript'></script>\n";
 		$expected .= "<script src='/wp-includes/js/dist/vendor/wp-polyfill.min.js' id='wp-polyfill-js' type='text/javascript'></script>\n";
 		$expected .= "<script id='wp-polyfill-js-after' type='text/javascript'>\n";
-		$expected .= "( 'fetch' in window ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js\"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js\"></scr' + 'ipt>' );( window.DOMRect ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-dom-rect.min.js\"></scr' + 'ipt>' );( window.URL && window.URL.prototype && window.URLSearchParams ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-url.min.js\"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js\"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js\"></scr' + 'ipt>' );\n";
+		$expected .= "( 'fetch' in window ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js\" type=\"text/javascript\"></scr' + 'ipt>' );( document.contains ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-node-contains.min.js\" type=\"text/javascript\"></scr' + 'ipt>' );( window.DOMRect ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-dom-rect.min.js\" type=\"text/javascript\"></scr' + 'ipt>' );( window.URL && window.URL.prototype && window.URLSearchParams ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-url.min.js\" type=\"text/javascript\"></scr' + 'ipt>' );( window.FormData && window.FormData.prototype.keys ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-formdata.min.js\" type=\"text/javascript\"></scr' + 'ipt>' );( Element.prototype.matches && Element.prototype.closest ) || document.write( '<script src=\"http://example.org/wp-includes/js/dist/vendor/wp-polyfill-element-closest.min.js\" type=\"text/javascript\"></scr' + 'ipt>' );\n";
 		$expected .= "</script>\n";
 		$expected .= "<script src='/wp-includes/js/dist/dom-ready.min.js' id='wp-dom-ready-js' type='text/javascript'></script>\n";
 		$expected .= "<script src='/wp-includes/js/dist/i18n.min.js' id='wp-i18n-js' type='text/javascript'></script>\n";
