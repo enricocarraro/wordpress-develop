@@ -461,14 +461,11 @@ final class WP_Customize_Manager {
 				),
 				'error'         => $ajax_message,
 			);
-			?>
-			<script>
-			( function( api, settings ) {
+			$js       = '( function( api, settings ) {
 				var preview = new api.Messenger( settings.messengerArgs );
-				preview.send( 'iframe-loading-error', settings.error );
-			} )( wp.customize, <?php echo wp_json_encode( $settings ); ?> );
-			</script>
-			<?php
+				preview.send( "iframe-loading-error", settings.error );
+			} )( wp.customize, ' . wp_json_encode( $settings ) . ' );';
+			wp_inline_script( $js );
 			$message .= ob_get_clean();
 		}
 
@@ -2070,8 +2067,7 @@ final class WP_Customize_Manager {
 		if ( ! $this->messenger_channel ) {
 			return;
 		}
-		?>
-		<script>
+		$js = <<<'JS'
 		( function() {
 			var urlParser, oldQueryParams, newQueryParams, i;
 			if ( parent !== window ) {
@@ -2091,8 +2087,8 @@ final class WP_Customize_Manager {
 				location.replace( urlParser.href );
 			}
 		} )();
-		</script>
-		<?php
+JS;
+		wp_inline_script( $js );
 	}
 
 	/**

@@ -2456,9 +2456,8 @@ function wp_underscore_playlist_templates() {
 function wp_playlist_scripts( $type ) {
 	wp_enqueue_style( 'wp-mediaelement' );
 	wp_enqueue_script( 'wp-playlist' );
-	?>
-<!--[if lt IE 9]><script>document.createElement('<?php echo esc_js( $type ); ?>');</script><![endif]-->
-	<?php
+
+	echo '<!--[if lt IE 9]>' . trim( wp_inline_script( 'document.createElement("' . esc_js( $type ) . '");' ) ) . '<![endif]-->';
 	add_action( 'wp_footer', 'wp_underscore_playlist_templates', 0 );
 	add_action( 'admin_footer', 'wp_underscore_playlist_templates', 0 );
 }
@@ -2944,7 +2943,7 @@ function wp_audio_shortcode( $attr, $content = '' ) {
 	$html = '';
 
 	if ( 'mediaelement' === $library && 1 === $instance ) {
-		$html .= "<!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->\n";
+		$html .= '<!--[if lt IE 9]>' . trim( wp_inline_script( 'document.createElement("audio");', array(), true, false ) ) . "<![endif]-->\n";
 	}
 
 	$html .= sprintf( '<audio %s controls="controls">', join( ' ', $attr_strings ) );
@@ -3212,7 +3211,7 @@ function wp_video_shortcode( $attr, $content = '' ) {
 	$html = '';
 
 	if ( 'mediaelement' === $library && 1 === $instance ) {
-		$html .= "<!--[if lt IE 9]><script>document.createElement('video');</script><![endif]-->\n";
+		$html .= '<!--[if lt IE 9]>' . trim( wp_inline_script( 'document.createElement("video");', array(), true, false ) ) . "<![endif]-->\n";
 	}
 
 	$html .= sprintf( '<video %s controls="controls">', join( ' ', $attr_strings ) );
