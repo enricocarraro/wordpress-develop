@@ -528,7 +528,7 @@ function wp_iframe( $content_func, ...$args ) {
 	}
 	$js = 'addLoadEvent = function(func){if(typeof jQuery!="undefined")jQuery(document).ready(func);else if(typeof wpOnload!="function"){wpOnload=func;}else{var oldonload=wpOnload;wpOnload=function(){oldonload();func();}}};
 	var ajaxurl = "' . admin_url( 'admin-ajax.php', 'relative' ) . '", pagenow = "media-upload-popup", adminpage = "media-upload-popup",
-	isRtl = <?php echo (int) is_rtl(); ?>;';
+	isRtl = ' . ( (int) is_rtl() ) . ';';
 
 	wp_inline_script( $js );
 
