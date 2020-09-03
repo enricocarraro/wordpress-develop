@@ -271,8 +271,22 @@ $content = esc_textarea( $content );
 		<div id="documentation" class="hide-if-no-js">
 			<label for="docs-list"><?php _e( 'Documentation:' ); ?></label>
 			<?php echo $docs_select; ?>
-			<input disabled id="docs-lookup" type="button" class="button" value="<?php esc_attr_e( 'Look Up' ); ?>" onclick="if ( '' != jQuery('#docs-list').val() ) { window.open( 'https://api.wordpress.org/core/handbook/1.0/?function=' + escape( jQuery( '#docs-list' ).val() ) + '&amp;locale=<?php echo urlencode( get_user_locale() ); ?>&amp;version=<?php echo urlencode( get_bloginfo( 'version' ) ); ?>&amp;redirect=true'); }" />
-		</div>
+			<input disabled id="docs-lookup" type="button" class="button" value="<?php esc_attr_e( 'Look Up' ); ?>" />
+			<?php 
+			$user_locale = urlencode( get_user_locale() );
+			$blog_version = urlencode( get_bloginfo( 'version' ) );
+			$js = <<<JS
+			document.addEventListener('DOMContentLoaded', function () {
+				document.getElementById('docs-lookup').addEventListener('click', function () {
+					if ( '' != jQuery('#docs-list').val() ) { 
+						window.open( 'https://api.wordpress.org/core/handbook/1.0/?function=' + escape( jQuery( '#docs-list' ).val() ) + '&locale=$user_locale&version=$blog_version&redirect=true'); 
+					}
+				});
+			});
+JS;
+			wp_inline_script( $js );
+			?>
+	</div>
 	<?php endif; ?>
 
 	<?php if ( is_writeable( $real_file ) ) : ?>
