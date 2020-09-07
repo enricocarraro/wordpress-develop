@@ -1196,7 +1196,7 @@ final class WP_Customize_Widgets {
 			unset( $registered_widget['callback'] ); // May not be JSON-serializeable.
 		}
 
-		wp_inline_script( 'var _wpWidgetCustomizerPreviewSettings = ' . wp_json_encode( $settings ) . ';' );
+		wp_print_inline_script_tag( 'var _wpWidgetCustomizerPreviewSettings = ' . wp_json_encode( $settings ) . ';' );
 	}
 
 	/**

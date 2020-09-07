@@ -22,7 +22,7 @@ function options_discussion_add_js() {
 		});
 	})(jQuery);
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**
@@ -97,7 +97,7 @@ JS;
 		});
 	});
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**
@@ -118,7 +118,7 @@ function options_reading_add_js() {
 		section.find( 'input:radio' ).change( check_disabled );
 	});
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**

@@ -739,5 +739,5 @@ if ( post_type_supports( $post_type, 'comments' ) ) {
 
 <?php
 if ( ! wp_is_mobile() && post_type_supports( $post_type, 'title' ) && '' === $post->post_title ) {
-	wp_inline_script( 'try{document.post.title.focus();}catch(e){}' );
+	wp_print_inline_script_tag( 'try{document.post.title.focus();}catch(e){}' );
 }

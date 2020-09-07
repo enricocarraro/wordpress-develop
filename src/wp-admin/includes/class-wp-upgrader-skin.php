@@ -230,14 +230,14 @@ class WP_Upgrader_Skin {
 			$js = 'if ( window.postMessage && JSON ) {
 						window.parent.postMessage( JSON.stringify( { action: "decrementUpdateCount", upgradeType: "' . $type . '" } ), window.location.protocol + "//" + window.location.hostname );
 					}';
-			wp_inline_script( $js );
+			wp_print_inline_script_tag( $js );
 		} else {
 			$js = '(function( wp ) {
 						if ( wp && wp.updates && wp.updates.decrementCount ) {
 							wp.updates.decrementCount( "' . $type . '" );
 						}
 					})( window.wp );';
-			wp_inline_script( $js );
+			wp_print_inline_script_tag( $js );
 		}
 	}
 

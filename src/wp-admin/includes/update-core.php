@@ -1450,7 +1450,7 @@ function _redirect_to_about_wordpress( $new_version ) {
 	);
 	echo '</div>';
 
-	wp_inline_script( 'window.location = "about.php?updated";' );
+	wp_print_inline_script_tag( 'window.location = "about.php?updated";' );
 
 	// Include admin-footer.php and exit.
 	require_once ABSPATH . 'wp-admin/admin-footer.php';

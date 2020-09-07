@@ -247,5 +247,5 @@ $referer = wp_get_referer();
 
 <?php
 if ( ! wp_is_mobile() ) {
-	wp_inline_script( 'try{document.post.name.focus();}catch(e){}' );
+	wp_print_inline_script_tag( 'try{document.post.name.focus();}catch(e){}' );
 }

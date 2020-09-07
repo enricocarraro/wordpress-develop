@@ -77,7 +77,7 @@ if ( get_user_setting( 'uploader' ) || isset( $_GET['browser-uploader'] ) ) {
 	<?php
 	media_upload_form();
 
-	wp_inline_script( "var post_id = $post_id, shortform = 3;" );
+	wp_print_inline_script_tag( "var post_id = $post_id, shortform = 3;" );
 	?>
 	<input type="hidden" name="post_id" id="post_id" value="<?php echo $post_id; ?>" />
 	<?php wp_nonce_field( 'media-form' ); ?>

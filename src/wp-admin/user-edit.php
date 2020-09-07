@@ -787,6 +787,6 @@ $js = <<<JS
 		document.getElementById('pass1').focus();
 	}
 JS;
-wp_inline_script( $js );
+wp_print_inline_script_tag( $js );
 
 require_once ABSPATH . 'wp-admin/admin-footer.php';

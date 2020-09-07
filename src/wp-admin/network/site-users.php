@@ -219,7 +219,7 @@ if ( ! wp_is_large_network( 'users' ) && apply_filters( 'show_network_site_users
 
 require_once ABSPATH . 'wp-admin/admin-header.php';
 
-wp_inline_script( 'var current_site_id = ' . $id . ';' );
+wp_print_inline_script_tag( 'var current_site_id = ' . $id . ';' );
 ?>
 
 <div class="wrap">

@@ -89,7 +89,7 @@ $js = 'addLoadEvent = function(func){if(typeof jQuery!=="undefined")jQuery(docum
 	decimalPoint = "' . addslashes( $wp_locale->number_format['decimal_point'] ) . '",
 	isRtl = ' . ( (int) is_rtl() ) . ';';
 
-wp_inline_script( $js );
+wp_print_inline_script_tag( $js );
 
 /**
  * Enqueue scripts for all admin pages.
@@ -233,7 +233,7 @@ $admin_body_classes = ltrim( $admin_body_classes . ' ' . $admin_body_class );
 <body class="wp-admin wp-core-ui no-js <?php echo $admin_body_classes; ?>">
 <?php
 
-wp_inline_script( 'document.body.className = document.body.className.replace("no-js","js");' );
+wp_print_inline_script_tag( 'document.body.className = document.body.className.replace("no-js","js");' );
 
 // Make sure the customize body classes are correct as early as possible.
 if ( current_user_can( 'customize' ) ) {

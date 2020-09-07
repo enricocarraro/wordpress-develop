@@ -444,7 +444,7 @@ switch ( $step ) {
 }
 
 if ( ! wp_is_mobile() ) {
-	wp_inline_script( 'var t = document.getElementById("weblog_title"); if (t){ t.focus(); }' );
+	wp_print_inline_script_tag( 'var t = document.getElementById("weblog_title"); if (t){ t.focus(); }' );
 }
 
 wp_print_scripts( $scripts_to_print );
@@ -455,7 +455,7 @@ jQuery( function( $ ) {
 } );
 JS;
 
-wp_inline_script( $js );
+wp_print_inline_script_tag( $js );
 
 ?>
 </body>

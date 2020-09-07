@@ -129,7 +129,7 @@ switch ( $action ) {
 		}
 		setTimeout( "nextpage()", 250 );
 		//-->';
-		wp_inline_script( $js );
+		wp_print_inline_script_tag( $js );
 		break;
 	case 'show':
 	default:

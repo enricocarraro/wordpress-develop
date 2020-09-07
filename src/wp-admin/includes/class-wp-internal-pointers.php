@@ -141,7 +141,7 @@ final class WP_Internal_Pointers {
 					$(document).ready( setup );
 
 			})( jQuery );';
-			wp_inline_script( $js );
+			wp_print_inline_script_tag( $js );
 	}
 
 	public static function pointer_wp330_toolbar() {}

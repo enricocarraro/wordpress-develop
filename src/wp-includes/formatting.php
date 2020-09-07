@@ -5733,7 +5733,7 @@ function _print_emoji_detection_script() {
 
 		$js  = 'window._wpemojiSettings = ' . wp_json_encode( $settings ) . ';';
 		$js .= file_get_contents( ABSPATH . WPINC . '/js/wp-emoji-loader.js' );
-		wp_inline_script( $js );
+		wp_print_inline_script_tag( $js );
 	} else {
 		$settings['source'] = array(
 			/** This filter is documented in wp-includes/class.wp-scripts.php */
@@ -5752,7 +5752,7 @@ function _print_emoji_detection_script() {
 		 */
 		$js = 'window._wpemojiSettings = ' . wp_json_encode( $settings ) . ';
 		include "js/wp-emoji-loader.min.js"';
-		wp_inline_script( $js );
+		wp_print_inline_script_tag( $js );
 	}
 }
 

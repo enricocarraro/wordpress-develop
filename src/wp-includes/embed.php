@@ -465,7 +465,7 @@ JS;
 	}
 	$script_output .= "\n//--><!]]>";
 
-	$output .= wp_inline_script( $script_output, array(), true, false );
+	$output .= wp_print_inline_script_tag( $script_output, array(), false );
 
 	$output .= sprintf(
 		'<iframe sandbox="allow-scripts" security="restricted" src="%1$s" width="%2$d" height="%3$d" title="%4$s" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="wp-embedded-content"></iframe>',
@@ -1070,7 +1070,7 @@ function print_embed_scripts() {
 JS;
 	}
 
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**

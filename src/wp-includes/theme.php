@@ -3558,7 +3558,7 @@ JS;
 			b[c] += ( window.postMessage && request ? ' ' : ' no-' ) + cs;
 		}());
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**

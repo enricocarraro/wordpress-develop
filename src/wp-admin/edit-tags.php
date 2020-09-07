@@ -651,7 +651,7 @@ if ( $can_edit_terms ) {
 
 <?php
 if ( ! wp_is_mobile() ) {
-	wp_inline_script( 'try{document.forms.addtag["tag-name"].focus();}catch(e){}' );
+	wp_print_inline_script_tag( 'try{document.forms.addtag["tag-name"].focus();}catch(e){}' );
 }
 
 $wp_list_table->inline_edit();

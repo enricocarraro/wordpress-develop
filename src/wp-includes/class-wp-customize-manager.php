@@ -465,7 +465,7 @@ final class WP_Customize_Manager {
 				var preview = new api.Messenger( settings.messengerArgs );
 				preview.send( "iframe-loading-error", settings.error );
 			} )( wp.customize, ' . wp_json_encode( $settings ) . ' );';
-			wp_inline_script( $js );
+			wp_print_inline_script_tag( $js );
 			$message .= ob_get_clean();
 		}
 
@@ -2088,7 +2088,7 @@ final class WP_Customize_Manager {
 			}
 		} )();
 JS;
-		wp_inline_script( $js );
+		wp_print_inline_script_tag( $js );
 	}
 
 	/**
@@ -2204,7 +2204,7 @@ JS;
 			})( _wpCustomizeSettings.values );
 JS;
 
-			wp_inline_script( $js );
+			wp_print_inline_script_tag( $js );
 	}
 
 	/**
@@ -4960,7 +4960,7 @@ JS;
 		}
 		$js .= '})( _wpCustomizeSettings.controls );';
 
-		wp_inline_script( $js );
+		wp_print_inline_script_tag( $js );
 	}
 
 	/**

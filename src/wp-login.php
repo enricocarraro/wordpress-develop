@@ -100,7 +100,7 @@ function login_header( $title = 'Log In', $message = '', $wp_error = null ) {
 	 * but maybe better if it's not removable by plugins.
 	 */
 	if ( 'loggedout' === $wp_error->get_error_code() ) {
-		wp_inline_script( 'if("sessionStorage" in window){try{for(var key in sessionStorage){if(key.indexOf("wp-autosave-")!=-1){sessionStorage.removeItem(key)}}}catch(e){}};' );
+		wp_print_inline_script_tag( 'if("sessionStorage" in window){try{for(var key in sessionStorage){if(key.indexOf("wp-autosave-")!=-1){sessionStorage.removeItem(key)}}}catch(e){}};' );
 	}
 
 	/**
@@ -192,7 +192,7 @@ function login_header( $title = 'Log In', $message = '', $wp_error = null ) {
 	<body class="login no-js <?php echo esc_attr( implode( ' ', $classes ) ); ?>">
 	<?php
 
-	wp_inline_script( 'document.body.className = document.body.className.replace("no-js", "js");' );
+	wp_print_inline_script_tag( 'document.body.className = document.body.className.replace("no-js", "js");' );
 
 	/**
 	 * Fires in the login page header after the body tag is opened.
@@ -300,7 +300,7 @@ function login_footer( $input_id = '' ) {
 	if ( ! empty( $input_id ) ) {
 		$js = 'try{document.getElementById("' . $input_id . '").focus();}catch(e){}
 		if(typeof wpOnload=="function")wpOnload();';
-		wp_inline_script( $js );
+		wp_print_inline_script_tag( $js );
 	}
 
 	/**
@@ -323,7 +323,7 @@ function login_footer( $input_id = '' ) {
  * @since 3.0.0
  */
 function wp_shake_js() {
-	wp_inline_script( 'document.querySelector("form").classList.add("shake");' );
+	wp_print_inline_script_tag( 'document.querySelector("form").classList.add("shake");' );
 }
 
 /**
@@ -1288,7 +1288,7 @@ switch ( $action ) {
 				do_action( 'login_footer' );
 
 				if ( $customize_login ) {
-					wp_inline_script( "setTimeout( function(){ new wp.customize.Messenger({ url: '" . wp_customize_url() . "', channel: 'login' }).send('login') }, 1000 );" );
+					wp_print_inline_script_tag( "setTimeout( function(){ new wp.customize.Messenger({ url: '" . wp_customize_url() . "', channel: 'login' }).send('login') }, 1000 );" );
 				}
 
 				?>
@@ -1499,7 +1499,7 @@ switch ( $action ) {
 		}
 
 		// Run `wpOnload()` if defined.
-		wp_inline_script( $login_script . "if ( typeof wpOnload === 'function' ) { wpOnload() }" );
+		wp_print_inline_script_tag( $login_script . "if ( typeof wpOnload === 'function' ) { wpOnload() }" );
 
 		if ( $interim_login ) {
 			$js = <<<JS
@@ -1515,7 +1515,7 @@ switch ( $action ) {
 	} catch( er ) {}
 }());
 JS;
-			wp_inline_script( $js );
+			wp_print_inline_script_tag( $js );
 		}
 
 		login_footer();

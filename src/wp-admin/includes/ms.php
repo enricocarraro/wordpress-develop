@@ -840,7 +840,7 @@ function can_edit_network( $network_id ) {
  * @access private
  */
 function _thickbox_path_admin_subfolder() {
-	wp_inline_script( 'var tb_pathToImage = "' . includes_url( 'js/thickbox/loadingAnimation.gif', 'relative' ) . '";' );
+	wp_print_inline_script_tag( 'var tb_pathToImage = "' . includes_url( 'js/thickbox/loadingAnimation.gif', 'relative' ) . '";' );
 }
 
 /**
@@ -1005,7 +1005,7 @@ jQuery(document).ready( function($) {
 	});
 });
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**

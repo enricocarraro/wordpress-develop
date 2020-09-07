@@ -214,5 +214,5 @@ $blog_details = get_blog_details();
 </div>
 <?php
 
-wp_inline_script( "var key_input = document.getElementById('key');\nkey_input && key_input.focus();" );
+wp_print_inline_script_tag( "var key_input = document.getElementById('key');\nkey_input && key_input.focus();" );
 get_footer( 'wp-activate' );

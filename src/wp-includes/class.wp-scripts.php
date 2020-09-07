@@ -234,7 +234,7 @@ class WP_Scripts extends WP_Dependencies {
 			$js = "/* <![CDATA[ */\n$js\n/* ]]> */";
 		}
 
-		wp_inline_script( $js, array( 'id' => esc_attr( $handle ) . '-js-extra' ), false );
+		wp_print_inline_script_tag( $js, array( 'id' => "$handle-js-extra" ) );
 
 		return true;
 	}
@@ -292,19 +292,17 @@ class WP_Scripts extends WP_Dependencies {
 		$after_handle  = $this->print_inline_script( $handle, 'after', false );
 
 		if ( $before_handle ) {
-			$before_handle = wp_inline_script(
+			$before_handle = wp_print_inline_script_tag(
 				$before_handle,
-				array( 'id' => esc_attr( $handle ) . '-js-before' ),
-				false,
+				array( 'id' => "$handle-js-before" ),
 				false
 			);
 		}
 
 		if ( $after_handle ) {
-			$after_handle = wp_inline_script(
+			$after_handle = wp_print_inline_script_tag(
 				$after_handle,
-				array( 'id' => esc_attr( $handle ) . '-js-after' ),
-				false,
+				array( 'id' => "$handle-js-after" ),
 				false
 			);
 		}
@@ -317,10 +315,9 @@ class WP_Scripts extends WP_Dependencies {
 
 		$translations = $this->print_translations( $handle, false );
 		if ( $translations ) {
-			$translations = wp_inline_script(
+			$translations = wp_print_inline_script_tag(
 				$translations,
-				array( 'id' => esc_attr( $handle ) . '-js-translations' ),
-				false,
+				array( 'id' => "$handle-js-translations" ),
 				false
 			);
 		}
@@ -394,12 +391,11 @@ class WP_Scripts extends WP_Dependencies {
 		}
 
 		$tag  = $translations . $cond_before . $before_handle;
-		$tag .= wp_script(
+		$tag .= wp_print_script_loader_tag(
 			array(
 				'src' => $src,
-				'id'  => esc_attr( $handle ) . '-js',
+				'id'  => "$handle-js",
 			),
-			false,
 			false
 		);
 		$tag .= $after_handle . $cond_after;
@@ -474,7 +470,7 @@ class WP_Scripts extends WP_Dependencies {
 		$output = trim( implode( "\n", $output ), "\n" );
 
 		if ( $echo ) {
-			wp_inline_script( $output, array( 'id' => esc_attr( $handle ) . '-js-' . $position ), false );
+			wp_print_inline_script_tag( $output, array( 'id' => "$handle-js-$position" ) );
 		}
 
 		return $output;
@@ -611,7 +607,7 @@ class WP_Scripts extends WP_Dependencies {
 JS;
 
 		if ( $echo ) {
-			wp_inline_script( $output, array( 'id' => esc_attr( $handle ) . '-js-translations' ), false );
+			wp_print_inline_script_tag( $output, array( 'id' => "$handle-js-translations" ) );
 		}
 
 		return $output;

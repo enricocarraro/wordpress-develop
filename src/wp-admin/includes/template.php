@@ -2033,7 +2033,7 @@ function iframe_header( $title = '', $deprecated = false ) {
 		decimalPoint = "' . addslashes( $wp_locale->number_format['decimal_point'] ) . '",
 		isRtl = ' . ( (int) is_rtl() ) . ';';
 
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 
 	/** This action is documented in wp-admin/admin-header.php */
 	do_action( 'admin_enqueue_scripts', $hook_suffix );
@@ -2083,7 +2083,7 @@ c = c.replace(/no-js/, 'js');
 document.body.className = c;
 })();
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**
@@ -2115,7 +2115,7 @@ function iframe_footer() {
 	do_action( 'admin_print_footer_scripts' );
 	?>
 	</div>
-	<?php	wp_inline_script( 'if(typeof wpOnload=="function")wpOnload();' ); ?>
+	<?php	wp_print_inline_script_tag( 'if(typeof wpOnload=="function")wpOnload();' ); ?>
 </body>
 </html>
 	<?php
@@ -2379,7 +2379,7 @@ function compression_test() {
 	};
 	testCompression.check();
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**

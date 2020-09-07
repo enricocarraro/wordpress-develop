@@ -1010,7 +1010,7 @@ function wp_color_scheme_settings() {
 		);
 	}
 
-	wp_inline_script( 'var _wpColorScheme = ' . wp_json_encode( array( 'icons' => $icon_colors ) ) . ';' );
+	wp_print_inline_script_tag( 'var _wpColorScheme = ' . wp_json_encode( array( 'icons' => $icon_colors ) ) . ';' );
 }
 
 /**
@@ -1285,7 +1285,7 @@ function wp_admin_canonical_url() {
 		window.history.replaceState( null, null, document.getElementById( 'wp-admin-canonical' ).href + window.location.hash );
 	}
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**
@@ -1325,7 +1325,7 @@ function wp_page_reload_on_back_button_js() {
 		document.location.reload( true );
 	}
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**

@@ -202,7 +202,7 @@ function wp_get_script_polyfill( $scripts, $tests ) {
 			continue;
 		}
 
-		$script_string = substr( wp_script( array( 'src' => $src ), true, false ), 0, -10 ) . "</scr' + 'ipt>";
+		$script_string = substr( wp_print_script_loader_tag( array( 'src' => $src ), false ), 0, -10 ) . "</scr' + 'ipt>";
 
 		$polyfill .= (
 			// Test presence of feature...
@@ -1909,7 +1909,7 @@ function _print_scripts() {
 
 	if ( $concat ) {
 		if ( ! empty( $wp_scripts->print_code ) ) {
-			wp_inline_script( "\n/* <![CDATA[ */\n{$wp_scripts->print_code}/* ]]> */\n", array(), false );
+			wp_print_inline_script_tag( "\n/* <![CDATA[ */\n{$wp_scripts->print_code}/* ]]> */\n" );
 		}
 
 		$concat       = str_split( $concat, 128 );
@@ -1920,7 +1920,7 @@ function _print_scripts() {
 		}
 
 		$src = $wp_scripts->base_url . "/wp-admin/load-scripts.php?c={$zip}" . $concatenated . '&ver=' . $wp_scripts->default_version;
-		wp_script( array( 'src' => esc_attr( $src ) ), false );
+		wp_print_script_loader_tag( array( 'src' => esc_attr( $src ) ) );
 	}
 
 	if ( ! empty( $wp_scripts->print_html ) ) {

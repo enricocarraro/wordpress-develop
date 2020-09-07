@@ -270,7 +270,7 @@ function _cleanup_image_add_caption( $matches ) {
 function media_send_to_editor( $html ) {
 	$js = 'var win = window.dialogArguments || opener || parent || top; 
 	win.send_to_editor( ' . wp_json_encode( $html ) . ' );';
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 
 	exit;
 }
@@ -530,7 +530,7 @@ function wp_iframe( $content_func, ...$args ) {
 	var ajaxurl = "' . admin_url( 'admin-ajax.php', 'relative' ) . '", pagenow = "media-upload-popup", adminpage = "media-upload-popup",
 	isRtl = ' . ( (int) is_rtl() ) . ';';
 
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 
 	/** This action is documented in wp-admin/admin-header.php */
 	do_action( 'admin_enqueue_scripts', 'media-upload-popup' );
@@ -592,14 +592,14 @@ function wp_iframe( $content_func, ...$args ) {
 	<body<?php echo $body_id_attr; ?> class="wp-core-ui no-js">
 	<?php
 
-	wp_inline_script( 'document.body.className = document.body.className.replace("no-js", "js");' );
+	wp_print_inline_script_tag( 'document.body.className = document.body.className.replace("no-js", "js");' );
 
 	call_user_func_array( $content_func, $args );
 
 	/** This action is documented in wp-admin/admin-footer.php */
 	do_action( 'admin_print_footer_scripts' );
 
-	wp_inline_script( 'if(typeof wpOnload=="function")wpOnload();' );
+	wp_print_inline_script_tag( 'if(typeof wpOnload=="function")wpOnload();' );
 
 	?>
 	</body>
@@ -790,7 +790,7 @@ function media_upload_form_handler() {
 	if ( isset( $_POST['insert-gallery'] ) || isset( $_POST['update-gallery'] ) ) {
 		$js = 'var win = window.dialogArguments || opener || parent || top; 
 		win.tb_remove();';
-		wp_inline_script( $js );
+		wp_print_inline_script_tag( $js );
 		exit;
 	}
 
@@ -2029,7 +2029,7 @@ function get_compat_media_markup( $attachment_id, $args = null ) {
 function media_upload_header() {
 	$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
 
-	wp_inline_script( "post_id = $post_id;" );
+	wp_print_inline_script_tag( "post_id = $post_id;" );
 
 	if ( empty( $_GET['chromeless'] ) ) {
 		echo '<div id="media-upload-header">';
@@ -2179,7 +2179,7 @@ function media_upload_form( $errors = null ) {
 
 	$js  = "var resize_height = $large_size_h, resize_width = $large_size_w,\n";
 	$js .= 'wpUploaderInit = ' . wp_json_encode( $plupload_init ) . ';';
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 
 	?>
 	<div id="plupload-upload-ui" class="hide-if-no-js">
@@ -2310,7 +2310,7 @@ function media_upload_type_form( $type = 'file', $errors = null, $id = null ) {
 		updateMediaForm();
 	});
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 
 	?>
 	<div id="media-items">
@@ -2467,7 +2467,7 @@ JS;
 		});
 	});
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 	?>
 	<div id="media-items">
 	<div class="media-item media-blank">
@@ -2524,7 +2524,7 @@ function media_upload_gallery_form( $errors ) {
 		}
 	});
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 
 	?>
 	<div id="sort-buttons" class="hide-if-no-js">
@@ -2854,7 +2854,7 @@ function media_upload_library_form( $errors ) {
 		}
 	});
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 	?>
 	<div id="media-items">
 		<?php add_filter( 'attachment_fields_to_edit', 'media_post_single_attachment_fields_to_edit', 10, 2 ); ?>

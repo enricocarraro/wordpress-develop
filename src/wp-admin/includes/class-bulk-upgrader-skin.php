@@ -105,7 +105,7 @@ class Bulk_Upgrader_Skin extends WP_Upgrader_Skin {
 			}
 			$this->error = implode( ', ', $messages );
 		}
-		wp_inline_script( 'jQuery(\'.waiting-' . esc_js( $this->upgrader->update_current ) . '\').hide();' );
+		wp_print_inline_script_tag( 'jQuery(\'.waiting-' . esc_js( $this->upgrader->update_current ) . '\').hide();' );
 	}
 
 	/**
@@ -126,7 +126,7 @@ class Bulk_Upgrader_Skin extends WP_Upgrader_Skin {
 	public function before( $title = '' ) {
 		$this->in_loop = true;
 		printf( '<h2>' . $this->upgrader->strings['skin_before_update_header'] . ' <span class="spinner waiting-' . $this->upgrader->update_current . '"></span></h2>', $title, $this->upgrader->update_current, $this->upgrader->update_count );
-		wp_inline_script( 'jQuery(\'.waiting-' . esc_js( $this->upgrader->update_current ) . '\').css("display", "inline-block");' );
+		wp_print_inline_script_tag( 'jQuery(\'.waiting-' . esc_js( $this->upgrader->update_current ) . '\').css("display", "inline-block");' );
 		// This progress messages div gets moved via JavaScript when clicking on "Show details.".
 		echo '<div class="update-messages hide-if-js" id="progress-' . esc_attr( $this->upgrader->update_current ) . '"><p>';
 		$this->flush_output();
@@ -144,7 +144,7 @@ class Bulk_Upgrader_Skin extends WP_Upgrader_Skin {
 				echo '<div class="error"><p>' . sprintf( $this->upgrader->strings['skin_update_failed'], $title ) . '</p></div>';
 			}
 
-			wp_inline_script( 'jQuery(\'#progress-' . esc_js( $this->upgrader->update_current ) . '\').show();' );
+			wp_print_inline_script_tag( 'jQuery(\'#progress-' . esc_js( $this->upgrader->update_current ) . '\').show();' );
 		}
 		if ( $this->result && ! is_wp_error( $this->result ) ) {
 			if ( ! $this->error ) {
@@ -154,7 +154,7 @@ class Bulk_Upgrader_Skin extends WP_Upgrader_Skin {
 					'</p></div>';
 			}
 
-			wp_inline_script( 'jQuery(\'.waiting-' . esc_js( $this->upgrader->update_current ) . '\').hide();</script>' );
+			wp_print_inline_script_tag( 'jQuery(\'.waiting-' . esc_js( $this->upgrader->update_current ) . '\').hide();</script>' );
 		}
 
 		$this->reset();

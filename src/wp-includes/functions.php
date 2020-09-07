@@ -6791,7 +6791,7 @@ function wp_post_preview_js() {
 		}
 	}());';
 
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**
@@ -7644,7 +7644,7 @@ function wp_fuzzy_number_match( $expected, $actual, $precision = 1 ) {
  * @param bool      $double_quotes  Optional. Uses double quotes `"` to wrap attribute values if true, single quotes `'` otherwise.
  * @return string  Inline JavaScript code wrapped around <script> tags if $echo is true, null otherwise.
  */
-function wp_sanitize_script_attributes( $attributes = array(), $double_quotes = true ) {
+function wp_sanitize_script_attributes( $attributes = array() ) {
 	if ( ! array_key_exists( 'type', $attributes ) && ! is_admin() && ! current_theme_supports( 'html5', 'script' ) ) {
 		$attributes['type'] = 'text/javascript';
 	}
@@ -7664,11 +7664,7 @@ function wp_sanitize_script_attributes( $attributes = array(), $double_quotes = 
 				$attributes_string .= ' ' . $attribute_name;
 			}
 		} else {
-			if ( $double_quotes ) {
-				$attributes_string .= sprintf( ' %s="%s"', $attribute_name, esc_attr( $attribute_value ) );
-			} else {
-				$attributes_string .= sprintf( " %s='%s'", $attribute_name, esc_attr( $attribute_value ) );
-			}
+			$attributes_string .= sprintf( ' %s="%s"', $attribute_name, esc_attr( $attribute_value ) );
 		}
 	}
 
@@ -7687,8 +7683,8 @@ function wp_sanitize_script_attributes( $attributes = array(), $double_quotes = 
  * @param string    $content        Optional. Code to be wrapped around `<script>` tags.
  * @return string|null  Inline JavaScript code wrapped around `<script>` tags if $echo is true, null otherwise.
  */
-function wp_print_script_loader_tag( $attributes, $double_quotes = true, $echo = true ) {
-	$output = sprintf( "<script%s></script>\n", wp_sanitize_script_attributes( $attributes, $double_quotes ) );
+function wp_print_script_loader_tag( $attributes, $echo = true ) {
+	$output = sprintf( "<script%s></script>\n", wp_sanitize_script_attributes( $attributes ) );
 
 	if ( $echo ) {
 		echo $output;
@@ -7709,12 +7705,12 @@ function wp_print_script_loader_tag( $attributes, $double_quotes = true, $echo =
  * @param bool      $echo           Optional. Prints to the page if true, returns the value otherwise.
  * @return string|null  Inline JavaScript code wrapped around `<script>` tags if $echo is true, null otherwise.
  */
-function wp_print_inline_script_tag( $javascript, $attributes = array(), $double_quotes = true, $echo = true ) {
+function wp_print_inline_script_tag( $javascript, $attributes = array(), $echo = true ) {
 	if ( '' !== $javascript ) {
 		$javascript = "\n" . trim( $javascript, "\n\r " ) . "\n";
 	}
 
-	$output = sprintf( "<script%s>%s</script>\n", wp_sanitize_script_attributes( $attributes, $double_quotes ), $javascript );
+	$output = sprintf( "<script%s>%s</script>\n", wp_sanitize_script_attributes( $attributes ), $javascript );
 
 	if ( $echo ) {
 		echo $output;

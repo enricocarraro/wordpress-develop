@@ -206,7 +206,7 @@ function dismissed_updates() {
 			$( '#show-dismissed' ).click( function() { $( '#dismissed-updates' ).toggle( 'fast' ); } );
 		});
 JS;
-		wp_inline_script( $js );
+		wp_print_inline_script_tag( $js );
 
 		echo '<p class="hide-if-no-js"><button type="button" class="button" id="show-dismissed" aria-expanded="false">' . __( 'Show hidden updates' ) . '</button></p>';
 		echo '<ul id="dismissed-updates" class="core-updates dismissed">';
@@ -753,7 +753,7 @@ function do_core_upgrade( $reinstall = false ) {
 		) . '</span>'
 	);
 
-		wp_inline_script( sprintf( 'window.location = "%s";', self_admin_url( 'about.php?updated' ) ) );
+		wp_print_inline_script_tag( sprintf( 'window.location = "%s";', self_admin_url( 'about.php?updated' ) ) );
 	?>
 	</div>
 	<?php

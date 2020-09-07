@@ -117,7 +117,7 @@ class WP_Widget_Archives extends WP_Widget {
 	dropdown.onchange = onSelectChange;
 })();
 /* ]]> */';
-			wp_inline_script( $js );
+			wp_print_inline_script_tag( $js );
 		} else {
 			$format = current_theme_supports( 'html5', 'navigation-widgets' ) ? 'html5' : 'xhtml';
 
