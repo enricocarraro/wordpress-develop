@@ -7635,36 +7635,34 @@ function wp_fuzzy_number_match( $expected, $actual, $precision = 1 ) {
 }
 
 /**
- * Wraps inline JavaScript in `<script>` tags.
+ * Formats attributes string from associative array $attributes to be placed insed `<script>` tag.
  *
- * Enables to inject attributes in the `<script>` tag via the `script_attributes` filter.
  * Automatically injects type attribute if needed.
+ * Used by wp_print_script_loader_tag() and wp_print_inline_script_tag().
  *
- * @param array     $attributes `<script>` tag attributes.
+ * @param array     $attributes     Optional. `<script>` tag attributes.
  * @param bool      $double_quotes  Optional. Uses double quotes `"` to wrap attribute values if true, single quotes `'` otherwise.
- * @param bool      $echo       Optional. Prints to the page if true, returns the value otherwise.
- * @param string    $content    Optional. Code to be wrapped around `<script>` tags.
- * @return string|null  Inline JavaScript code wrapped around <script> tags if $echo is true, null otherwise.
+ * @return string  Inline JavaScript code wrapped around <script> tags if $echo is true, null otherwise.
  */
-function wp_script( $attributes, $double_quotes = true, $echo = true, $content = '' ) {
+function wp_sanitize_script_attributes( $attributes = array(), $double_quotes = true ) {
 	if ( ! array_key_exists( 'type', $attributes ) && ! is_admin() && ! current_theme_supports( 'html5', 'script' ) ) {
 		$attributes['type'] = 'text/javascript';
 	}
-
 	/**
 	 * Filters script attributes.
 	 *
 	 * @param string $attributes    Associative array representing script attributes.
 	 */
-	$attributes = apply_filters( 'script_attributes', $attributes );
+	$attributes = apply_filters( 'wp_script_attributes', $attributes );
 
 	$attributes_string = '';
 	// $attributes entries without key are added to $attributes_string without the `=`,
 	// these elements will not be escaped.
 	foreach ( $attributes as $attribute_name => $attribute_value ) {
-		if ( is_bool( $attribute_value ) && $attribute_value
-		&& '' !== $attribute_name ) {
-			$attributes_string .= ' ' . $attribute_name;
+		if ( is_bool( $attribute_value ) ) {
+			if ( $attribute_value && '' !== $attribute_name ) {
+				$attributes_string .= ' ' . $attribute_name;
+			}
 		} else {
 			if ( $double_quotes ) {
 				$attributes_string .= sprintf( ' %s="%s"', $attribute_name, esc_attr( $attribute_value ) );
@@ -7674,11 +7672,23 @@ function wp_script( $attributes, $double_quotes = true, $echo = true, $content =
 		}
 	}
 
-	if ( '' !== $content ) {
-		$content = "\n" . trim( $content, "\n\r " ) . "\n";
-	}
+	return $attributes_string;
+}
 
-	$output = sprintf( "<script%s>%s</script>\n", $attributes_string, $content );
+/**
+ * Wraps inline JavaScript in `<script>` tags.
+ *
+ * Enables to inject attributes in the `<script>` tag via the `script_attributes` filter.
+ * Automatically injects type attribute if needed.
+ *
+ * @param array     $attributes     `<script>` tag attributes.
+ * @param bool      $double_quotes  Optional. Uses double quotes `"` to wrap attribute values if true, single quotes `'` otherwise.
+ * @param bool      $echo           Optional. Prints to the page if true, returns the value otherwise.
+ * @param string    $content        Optional. Code to be wrapped around `<script>` tags.
+ * @return string|null  Inline JavaScript code wrapped around `<script>` tags if $echo is true, null otherwise.
+ */
+function wp_print_script_loader_tag( $attributes, $double_quotes = true, $echo = true ) {
+	$output = sprintf( "<script%s></script>\n", wp_sanitize_script_attributes( $attributes, $double_quotes ) );
 
 	if ( $echo ) {
 		echo $output;
@@ -7694,11 +7704,21 @@ function wp_script( $attributes, $double_quotes = true, $echo = true, $content =
  * Automatically injects type attribute if needed.
  *
  * @param string    $javascript     Inline JavaScript code.
- * @param array     $attributes     Optional. <script> tag attributes.
+ * @param array     $attributes     Optional. `<script>` tag attributes.
  * @param bool      $double_quotes  Optional. Uses double quotes `"` to wrap attribute values if true, single quotes `'` otherwise.
  * @param bool      $echo           Optional. Prints to the page if true, returns the value otherwise.
- * @return string|null  Inline JavaScript code wrapped around <script> tags if $echo is true, null otherwise.
+ * @return string|null  Inline JavaScript code wrapped around `<script>` tags if $echo is true, null otherwise.
  */
-function wp_inline_script( $javascript, $attributes = array(), $double_quotes = true, $echo = true ) {
-	return wp_script( $attributes, $double_quotes, $echo, $javascript );
+function wp_print_inline_script_tag( $javascript, $attributes = array(), $double_quotes = true, $echo = true ) {
+	if ( '' !== $javascript ) {
+		$javascript = "\n" . trim( $javascript, "\n\r " ) . "\n";
+	}
+
+	$output = sprintf( "<script%s>%s</script>\n", wp_sanitize_script_attributes( $attributes, $double_quotes ), $javascript );
+
+	if ( $echo ) {
+		echo $output;
+	} else {
+		return $output;
+	}
 }
