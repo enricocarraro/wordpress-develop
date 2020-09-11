@@ -7674,7 +7674,7 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
 /**
  * Wraps inline JavaScript in `<script>` tags.
  *
- * Enables to inject attributes in the `<script>` tag via the `script_attributes` filter.
+ * Enables to inject attributes in the `<script>` tag via the `wp_script_attributes` filter.
  * Automatically injects type attribute if needed.
  *
  * @param array     $attributes     `<script>` tag attributes.
@@ -7696,7 +7696,7 @@ function wp_print_script_loader_tag( $attributes, $echo = true ) {
 /**
  * Wraps inline JavaScript in `<script>` tags.
  *
- * Enables to inject attributes in the `<script>` tag via the `inline_script_attributes` filter.
+ * Enables to inject attributes in the `<script>` tag via the `wp_script_attributes` filter.
  * Automatically injects type attribute if needed.
  *
  * @param string    $javascript     Inline JavaScript code.
@@ -7706,9 +7706,7 @@ function wp_print_script_loader_tag( $attributes, $echo = true ) {
  * @return string|null  Inline JavaScript code wrapped around `<script>` tags if $echo is true, null otherwise.
  */
 function wp_print_inline_script_tag( $javascript, $attributes = array(), $echo = true ) {
-	if ( '' !== $javascript ) {
-		$javascript = "\n" . trim( $javascript, "\n\r " ) . "\n";
-	}
+	$javascript = "\n" . trim( $javascript, "\n\r " ) . "\n";
 
 	$output = sprintf( "<script%s>%s</script>\n", wp_sanitize_script_attributes( $attributes ), $javascript );
 
