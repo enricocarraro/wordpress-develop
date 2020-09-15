@@ -7656,8 +7656,7 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
 	$attributes = apply_filters( 'wp_script_attributes', $attributes );
 
 	$attributes_string = '';
-	// $attributes entries without key are added to $attributes_string without the `=`,
-	// these elements will not be escaped.
+	// Only the attribute name is added to $attributes_string for entries with a boolean value, and are that true. 
 	foreach ( $attributes as $attribute_name => $attribute_value ) {
 		if ( is_bool( $attribute_value ) ) {
 			if ( $attribute_value && '' !== $attribute_name ) {
