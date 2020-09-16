@@ -284,7 +284,7 @@ $content = esc_textarea( $content );
 				});
 			});
 JS;
-			wp_inline_script( $js );
+			wp_print_inline_script_tag( $js );
 			?>
 	</div>
 	<?php endif; ?>

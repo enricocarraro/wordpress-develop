@@ -774,7 +774,7 @@ function meta_form( $post = null ) {
 		});
 	});
 JS;
-	wp_inline_script( $js );
+	wp_print_inline_script_tag( $js );
 }
 
 /**
