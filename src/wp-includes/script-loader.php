@@ -1302,6 +1302,8 @@ function wp_default_scripts( $scripts ) {
 		$scripts->add( 'custom-background', "/wp-admin/js/custom-background$suffix.js", array( 'wp-color-picker', 'media-views' ), false, 1 );
 		$scripts->add( 'media-gallery', "/wp-admin/js/media-gallery$suffix.js", array( 'jquery' ), false, 1 );
 
+		$scripts->add( 'media-events', "/wp-admin/js/media-events$suffix.js", array(), false, 1);
+
 		$scripts->add( 'svg-painter', '/wp-admin/js/svg-painter.js', array( 'jquery' ), false, 1 );
 	}
 }

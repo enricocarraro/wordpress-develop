@@ -1638,8 +1638,9 @@ function get_media_item( $attachment_id, $args = null ) {
 	$image_edit_button = '';
 
 	if ( wp_attachment_is_image( $post->ID ) && wp_image_editor_supports( array( 'mime_type' => $post->post_mime_type ) ) ) {
+		wp_enqueue_script( 'media-events' );
 		$nonce             = wp_create_nonce( "image_editor-$post->ID" );
-		$image_edit_button = "<input type='button' id='imgedit-open-btn-$post->ID' onclick='imageEdit.open( $post->ID, \"$nonce\" )' class='button' value='" . esc_attr__( 'Edit Image' ) . "' /> <span class='spinner'></span>";
+		$image_edit_button = "<input type='button' class='imgedit-open-btn' id='imgedit-open-btn-$post->ID' data-post-id='$post->ID' data-nonce='$nonce' class='button' value='" . esc_attr__( 'Edit Image' ) . "' /> <span class='spinner'></span>";
 	}
 
 	$attachment_url = get_permalink( $attachment_id );
@@ -1693,12 +1694,13 @@ function get_media_item( $attachment_id, $args = null ) {
 		if ( ! EMPTY_TRASH_DAYS ) {
 			$delete = "<a href='" . wp_nonce_url( "post.php?action=delete&amp;post=$attachment_id", 'delete-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='delete-permanently'>" . __( 'Delete Permanently' ) . '</a>';
 		} elseif ( ! MEDIA_TRASH ) {
-			$delete = "<a href='#' class='del-link' onclick=\"document.getElementById('del_attachment_$attachment_id').style.display='block';return false;\">" . __( 'Delete' ) . "</a>
+			wp_enqueue_script( 'media-events' );
+			$delete = "<a href='#' class='del-link' data-attachment-id='$attachment_id'>" . __( 'Delete' ) . "</a>
 				<div id='del_attachment_$attachment_id' class='del-attachment' style='display:none;'>" .
 				/* translators: %s: File name. */
 				'<p>' . sprintf( __( 'You are about to delete %s.' ), '<strong>' . $filename . '</strong>' ) . "</p>
 				<a href='" . wp_nonce_url( "post.php?action=delete&amp;post=$attachment_id", 'delete-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='button'>" . __( 'Continue' ) . "</a>
-				<a href='#' class='button' onclick=\"this.parentNode.style.display='none';return false;\">" . __( 'Cancel' ) . '</a>
+				<a href='#' class='button cancel-del-link'>" . __( 'Cancel' ) . '</a>
 				</div>';
 		} else {
 			$delete = "<a href='" . wp_nonce_url( "post.php?action=trash&amp;post=$attachment_id", 'trash-post_' . $attachment_id ) . "' id='del[$attachment_id]' class='delete'>" . __( 'Move to Trash' ) . "</a>
@@ -1722,12 +1724,13 @@ function get_media_item( $attachment_id, $args = null ) {
 		&& post_type_supports( get_post_type( $calling_post_id ), 'thumbnail' )
 		&& get_post_thumbnail_id( $calling_post_id ) != $attachment_id
 	) {
+		wp_enqueue_script( 'media-events' );
 
 		$calling_post             = get_post( $calling_post_id );
 		$calling_post_type_object = get_post_type_object( $calling_post->post_type );
 
 		$ajax_nonce = wp_create_nonce( "set_post_thumbnail-$calling_post_id" );
-		$thumbnail  = "<a class='wp-post-thumbnail' id='wp-post-thumbnail-" . $attachment_id . "' href='#' onclick='WPSetAsThumbnail(\"$attachment_id\", \"$ajax_nonce\");return false;'>" . esc_html( $calling_post_type_object->labels->use_featured_image ) . '</a>';
+		$thumbnail  = "<a class='wp-post-thumbnail' id='wp-post-thumbnail-" . $attachment_id . "' data-attachment-id='$attachment_id' data-ajax-nonce='$ajax_nonce' href='#'>" . esc_html( $calling_post_type_object->labels->use_featured_image ) . '</a>';
 	}
 
 	if ( ( $parsed_args['send'] || $thumbnail || $delete ) && ! isset( $form_fields['buttons'] ) ) {
@@ -2225,10 +2228,13 @@ function media_upload_form( $errors = null ) {
 		<label class="screen-reader-text" for="async-upload"><?php _e( 'Upload' ); ?></label>
 		<input type="file" name="async-upload" id="async-upload" />
 		<?php submit_button( __( 'Upload' ), 'primary', 'html-upload', false ); ?>
-		<a href="#" onclick="try{top.tb_remove();}catch(e){}; return false;"><?php _e( 'Cancel' ); ?></a>
+		<a href="#" id="cancel-async-upload"><?php _e( 'Cancel' ); ?></a>
 	</p>
 	<div class="clear"></div>
 	<?php
+
+	wp_enqueue_script( 'media-events' );
+
 	/**
 	 * Fires after the upload button in the media upload interface.
 	 *
@@ -2502,6 +2508,8 @@ JS;
 function media_upload_gallery_form( $errors ) {
 	global $redir_tab, $type;
 
+	wp_enqueue_script( 'media-events' );
+
 	$redir_tab = 'gallery';
 	media_upload_header();
 
@@ -2643,8 +2651,8 @@ JS;
 	</tbody></table>
 
 	<p class="ml-submit">
-	<input type="button" class="button" style="display:none;" onMouseDown="wpgallery.update();" name="insert-gallery" id="insert-gallery" value="<?php esc_attr_e( 'Insert gallery' ); ?>" />
-	<input type="button" class="button" style="display:none;" onMouseDown="wpgallery.update();" name="update-gallery" id="update-gallery" value="<?php esc_attr_e( 'Update gallery settings' ); ?>" />
+	<input type="button" class="button" style="display:none;" name="insert-gallery" id="insert-gallery" value="<?php esc_attr_e( 'Insert gallery' ); ?>" />
+	<input type="button" class="button" style="display:none;" name="update-gallery" id="update-gallery" value="<?php esc_attr_e( 'Update gallery settings' ); ?>" />
 	</p>
 	</div>
 	</form>
@@ -3097,8 +3105,9 @@ function edit_form_image_editor( $post ) {
 	if ( wp_attachment_is_image( $post->ID ) ) :
 		$image_edit_button = '';
 		if ( wp_image_editor_supports( array( 'mime_type' => $post->post_mime_type ) ) ) {
+			wp_enqueue_script( 'media-events' );
 			$nonce             = wp_create_nonce( "image_editor-$post->ID" );
-			$image_edit_button = "<input type='button' id='imgedit-open-btn-$post->ID' onclick='imageEdit.open( $post->ID, \"$nonce\" )' class='button' value='" . esc_attr__( 'Edit Image' ) . "' /> <span class='spinner'></span>";
+			$image_edit_button = "<input type='button' class='imgedit-open-btn' id='imgedit-open-btn-$post->ID' data-post-id='$post->ID' data-nonce='$nonce' class='button' value='" . esc_attr__( 'Edit Image' ) . "' /> <span class='spinner'></span>";
 		}
 
 		$open_style     = '';
