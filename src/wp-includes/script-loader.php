@@ -1920,7 +1920,7 @@ function _print_scripts() {
 		}
 
 		$src = $wp_scripts->base_url . "/wp-admin/load-scripts.php?c={$zip}" . $concatenated . '&ver=' . $wp_scripts->default_version;
-		wp_print_script_loader_tag( array( 'src' => esc_attr( $src ) ) );
+		wp_print_script_loader_tag( array( 'src' => $src ) );
 	}
 
 	if ( ! empty( $wp_scripts->print_html ) ) {
