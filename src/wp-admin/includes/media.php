@@ -2912,6 +2912,8 @@ function wp_media_insert_url_form( $default_view = 'image' ) {
 		$table_class = $view;
 	}
 
+	wp_enqueue_script( 'media-events' );
+
 	return '
 	<p class="media-types"><label><input type="radio" name="media_type" value="image" id="image-only"' . checked( 'image-only', $view, false ) . ' /> ' . __( 'Image' ) . '</label> &nbsp; &nbsp; <label><input type="radio" name="media_type" value="generic" id="not-image"' . checked( 'not-image', $view, false ) . ' /> ' . __( 'Audio, Video, or Other File' ) . '</label></p>
 	<p class="media-types media-types-required-info">' .
@@ -2924,7 +2926,7 @@ function wp_media_insert_url_form( $default_view = 'image' ) {
 				<label for="src"><span class="alignleft">' . __( 'URL' ) . '</span> <span class="required">*</span></label>
 				<span class="alignright" id="status_img"></span>
 			</th>
-			<td class="field"><input id="src" name="src" value="" type="text" required onblur="addExtImage.getImageData()" /></td>
+			<td class="field"><input id="src" name="src" value="" type="text" required/></td>
 		</tr>
 
 		<tr>
@@ -2947,13 +2949,13 @@ function wp_media_insert_url_form( $default_view = 'image' ) {
 		<tr class="align image-only">
 			<th scope="row" class="label"><p><label for="align">' . __( 'Alignment' ) . '</label></p></th>
 			<td class="field">
-				<input name="align" id="align-none" value="none" onclick="addExtImage.align=\'align\'+this.value" type="radio"' . ( 'none' === $default_align ? ' checked="checked"' : '' ) . ' />
+				<input name="align" id="align-none" value="none" type="radio"' . ( 'none' === $default_align ? ' checked="checked"' : '' ) . ' />
 				<label for="align-none" class="align image-align-none-label">' . __( 'None' ) . '</label>
-				<input name="align" id="align-left" value="left" onclick="addExtImage.align=\'align\'+this.value" type="radio"' . ( 'left' === $default_align ? ' checked="checked"' : '' ) . ' />
+				<input name="align" id="align-left" value="left" type="radio"' . ( 'left' === $default_align ? ' checked="checked"' : '' ) . ' />
 				<label for="align-left" class="align image-align-left-label">' . __( 'Left' ) . '</label>
-				<input name="align" id="align-center" value="center" onclick="addExtImage.align=\'align\'+this.value" type="radio"' . ( 'center' === $default_align ? ' checked="checked"' : '' ) . ' />
+				<input name="align" id="align-center" value="center" type="radio"' . ( 'center' === $default_align ? ' checked="checked"' : '' ) . ' />
 				<label for="align-center" class="align image-align-center-label">' . __( 'Center' ) . '</label>
-				<input name="align" id="align-right" value="right" onclick="addExtImage.align=\'align\'+this.value" type="radio"' . ( 'right' === $default_align ? ' checked="checked"' : '' ) . ' />
+				<input name="align" id="align-right" value="right" type="radio"' . ( 'right' === $default_align ? ' checked="checked"' : '' ) . ' />
 				<label for="align-right" class="align image-align-right-label">' . __( 'Right' ) . '</label>
 			</td>
 		</tr>
@@ -2964,14 +2966,14 @@ function wp_media_insert_url_form( $default_view = 'image' ) {
 			</th>
 			<td class="field"><input id="url" name="url" value="" type="text" /><br />
 
-			<button type="button" class="button" value="" onclick="document.forms[0].url.value=null">' . __( 'None' ) . '</button>
-			<button type="button" class="button" value="" onclick="document.forms[0].url.value=document.forms[0].src.value">' . __( 'Link to image' ) . '</button>
+			<button type="button" class="button" id="image-only-none" value="">' . __( 'None' ) . '</button>
+			<button type="button" class="button" id="image-only-link" value="">' . __( 'Link to image' ) . '</button>
 			<p class="help">' . __( 'Enter a link URL or click above for presets.' ) . '</p></td>
 		</tr>
 		<tr class="image-only">
 			<td></td>
 			<td>
-				<input type="button" class="button" id="go_button" style="color:#bbb;" onclick="addExtImage.insert()" value="' . esc_attr__( 'Insert into Post' ) . '" />
+				<input type="button" class="button" id="go_button" style="color:#bbb;" value="' . esc_attr__( 'Insert into Post' ) . '" />
 			</td>
 		</tr>
 		<tr class="not-image">

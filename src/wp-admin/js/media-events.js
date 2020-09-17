@@ -78,6 +78,13 @@
 				item.addEventListener( 'mousedown', function () {
 					wpgallery.update();
 				} );
+            } );
+        
+		const srcInput = document.getElementById( 'src' );
+		if ( srcInput !== null ) {
+			// wp_media_insert_url_form was called.
+			srcInput.addEventListener( 'blur', function () {
+				addExtImage.getImageData();
 			} );
 
 		var srcInput = document.getElementById( 'src' );
