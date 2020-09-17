@@ -4372,6 +4372,7 @@ function wp_enqueue_media( $args = array() ) {
 	if ( is_admin() ) {
 		wp_enqueue_script( 'mce-view' );
 		wp_enqueue_script( 'image-edit' );
+		wp_enqueue_script( 'image-editor-events' );
 	}
 	wp_enqueue_style( 'imgareaselect' );
 	wp_plupload_default_settings();

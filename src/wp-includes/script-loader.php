@@ -1289,6 +1289,8 @@ function wp_default_scripts( $scripts ) {
 		$scripts->add( 'image-edit', "/wp-admin/js/image-edit$suffix.js", array( 'jquery', 'jquery-ui-core', 'json2', 'imgareaselect', 'wp-a11y' ), false, 1 );
 		$scripts->set_translations( 'image-edit' );
 
+		$scripts->add( 'image-editor-events', "/wp-admin/js/image-editor-events$suffix.js", array( 'image-edit', 'jquery' ), false, 1 );
+
 		$scripts->add( 'set-post-thumbnail', "/wp-admin/js/set-post-thumbnail$suffix.js", array( 'jquery' ), false, 1 );
 		$scripts->set_translations( 'set-post-thumbnail' );
 

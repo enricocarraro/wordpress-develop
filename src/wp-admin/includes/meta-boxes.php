@@ -1452,6 +1452,7 @@ function register_and_do_post_meta_boxes( $post ) {
 
 	if ( 'attachment' === $post_type ) {
 		wp_enqueue_script( 'image-edit' );
+		wp_enqueue_script( 'image-editor-events' );
 		wp_enqueue_style( 'imgareaselect' );
 		add_meta_box( 'submitdiv', __( 'Save' ), 'attachment_submit_meta_box', null, 'side', 'core', array( '__back_compat_meta_box' => true ) );
 		add_action( 'edit_form_after_title', 'edit_form_image_editor' );

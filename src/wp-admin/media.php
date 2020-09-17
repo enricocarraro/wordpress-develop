@@ -77,6 +77,7 @@ switch ( $action ) {
 
 		wp_enqueue_script( 'wp-ajax-response' );
 		wp_enqueue_script( 'image-edit' );
+		wp_enqueue_script( 'image-editor-events' );
 		wp_enqueue_style( 'imgareaselect' );
 
 		get_current_screen()->add_help_tab(

@@ -22,6 +22,7 @@ if ( ! current_user_can( 'upload_files' ) ) {
 
 wp_enqueue_script( 'plupload-handlers' );
 wp_enqueue_script( 'image-edit' );
+wp_enqueue_script( 'image-editor-events' );
 wp_enqueue_script( 'set-post-thumbnail' );
 wp_enqueue_style( 'imgareaselect' );
 wp_enqueue_script( 'media-gallery' );
