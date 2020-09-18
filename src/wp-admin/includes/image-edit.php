@@ -141,7 +141,7 @@ function wp_image_editor( $post_id, $msg = false ) {
 
 	<div class="imgedit-group">
 	<div class="imgedit-group-top">
-		<h2><button type="button" onclick="imageEdit.toggleHelp(this);" class="button-link" aria-expanded="false"><?php _e( 'Restore original image' ); ?> <span class="dashicons dashicons-arrow-down imgedit-help-toggle"></span></button></h2>
+		<h2><button type="button" id="imgedit-restore-original" class="button-link" aria-expanded="false"><?php _e( 'Restore original image' ); ?> <span class="dashicons dashicons-arrow-down imgedit-help-toggle"></span></button></h2>
 		<div class="imgedit-help imgedit-restore">
 		<p>
 			<?php
