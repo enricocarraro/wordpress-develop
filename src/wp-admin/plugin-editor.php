@@ -272,10 +272,10 @@ $content = esc_textarea( $content );
 			<label for="docs-list"><?php _e( 'Documentation:' ); ?></label>
 			<?php echo $docs_select; ?>
 			<input disabled id="docs-lookup" type="button" class="button" value="<?php esc_attr_e( 'Look Up' ); ?>" />
-			<?php 
-			$user_locale = urlencode( get_user_locale() );
+			<?php
+			$user_locale  = urlencode( get_user_locale() );
 			$blog_version = urlencode( get_bloginfo( 'version' ) );
-			$js = <<<JS
+			$js           = <<<JS
 			document.addEventListener('DOMContentLoaded', function () {
 				document.getElementById('docs-lookup').addEventListener('click', function () {
 					if ( '' != jQuery('#docs-list').val() ) { 

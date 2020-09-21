@@ -2325,7 +2325,6 @@ function the_block_editor_meta_boxes() {
 	<?php endforeach; ?>
 	<?php
 
-
 	$meta_boxes_per_location = array();
 	foreach ( $locations as $location ) {
 		$meta_boxes_per_location[ $location ] = array();

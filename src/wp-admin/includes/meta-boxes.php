@@ -440,7 +440,7 @@ function attachment_submit_meta_box( $post ) {
 		if ( EMPTY_TRASH_DAYS && MEDIA_TRASH ) {
 			echo "<a class='submitdelete deletion' href='" . get_delete_post_link( $post->ID ) . "'>" . __( 'Move to Trash' ) . '</a>';
 		} else {
-			if( ! MEDIA_TRASH ) {
+			if ( ! MEDIA_TRASH ) {
 				wp_enqueue_script( 'metabox-events' );
 			}
 			echo "<a class='submitdelete deletion permanent-deletion' href='" . get_delete_post_link( $post->ID, null, true ) . "'>" . __( 'Delete permanently' ) . '</a>';

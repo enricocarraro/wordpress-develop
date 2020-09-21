@@ -704,7 +704,7 @@ function wp_default_scripts( $scripts ) {
 
 	$scripts->add( 'metabox-events', "/wp-includes/js/metabox-events$suffix.js", array( 'common', 'admin-comments', 'post' ), false, 1 );
 	$scripts->add( 'wp-lists', "/wp-includes/js/wp-lists$suffix.js", array( 'wp-ajax-response', 'jquery-color' ), false, 1 );
-	
+
 	// WordPress no longer uses or bundles Prototype or script.aculo.us. These are now pulled from an external source.
 	$scripts->add( 'prototype', 'https://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js', array(), '1.7.1' );
 	$scripts->add( 'scriptaculous-root', 'https://ajax.googleapis.com/ajax/libs/scriptaculous/1.9.0/scriptaculous.js', array( 'prototype' ), '1.9.0' );
@@ -1305,7 +1305,7 @@ function wp_default_scripts( $scripts ) {
 		$scripts->add( 'custom-background', "/wp-admin/js/custom-background$suffix.js", array( 'wp-color-picker', 'media-views' ), false, 1 );
 		$scripts->add( 'media-gallery', "/wp-admin/js/media-gallery$suffix.js", array( 'jquery' ), false, 1 );
 
-		$scripts->add( 'media-events', "/wp-admin/js/media-events$suffix.js", array(), false, 1);
+		$scripts->add( 'media-events', "/wp-admin/js/media-events$suffix.js", array( 'image-edit', 'jquery' ), false, 1 );
 
 		$scripts->add( 'svg-painter', '/wp-admin/js/svg-painter.js', array( 'jquery' ), false, 1 );
 	}

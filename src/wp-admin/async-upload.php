@@ -113,7 +113,7 @@ if ( is_wp_error( $id ) ) {
 		});
 	});
 JS;
-	wp_print_inline_script_tag ( $js );
+	wp_print_inline_script_tag( $js );
 	exit;
 }
 
