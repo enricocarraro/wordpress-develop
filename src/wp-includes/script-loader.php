@@ -702,7 +702,7 @@ function wp_default_scripts( $scripts ) {
 	$scripts->add( 'wp-auth-check', "/wp-includes/js/wp-auth-check$suffix.js", array( 'heartbeat' ), false, 1 );
 	$scripts->set_translations( 'wp-auth-check' );
 
-	$scripts->add( 'edit-post-events', "/wp-includes/js/edit-post-events$suffix.js", array(), false, 1 );
+	$scripts->add( 'metabox-events', "/wp-includes/js/metabox-events$suffix.js", array( 'common', 'admin-comments', 'post' ), false, 1 );
 	$scripts->add( 'wp-lists', "/wp-includes/js/wp-lists$suffix.js", array( 'wp-ajax-response', 'jquery-color' ), false, 1 );
 	
 	// WordPress no longer uses or bundles Prototype or script.aculo.us. These are now pulled from an external source.

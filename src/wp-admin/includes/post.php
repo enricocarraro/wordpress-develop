@@ -2297,7 +2297,7 @@ function the_block_editor_meta_boxes() {
 	$locations     = array( 'side', 'normal', 'advanced' );
 	$priorities    = array( 'high', 'sorted', 'core', 'default', 'low' );
 
-	wp_enqueue_script( 'edit-post-events' );
+	wp_enqueue_script( 'metabox-events' );
 
 	// Render meta boxes.
 	?>

@@ -1,5 +1,5 @@
 /**
- * @output wp-includes/js/edit-post-events.js
+ * @output wp-includes/js/edit-events.js
  */
 /**
  * Edit post event handlers.
@@ -13,10 +13,10 @@
 ( function ( document ) {
 	document.addEventListener( 'DOMContentLoaded', function () {
 		document
-			.querySelectorAll( '.metabox-location' )
+			.querySelectorAll( '#get-shortlink' )
 			.forEach( function ( item ) {
-				item.addEventListener( 'submit', function ( event ) {
-					event.preventDefault();
+				item.addEventListener( 'click', function ( ) {
+					prompt('URL:', document.getElementById("shortlink").value);
 				} );
 			} );
 
