@@ -2,7 +2,7 @@
  * @output wp-admin/js/setup-config.js
  */
 /**
- * Setup config event hanlder
+ * Setup config event handler
  *
  * @since 5.6.0
  *
