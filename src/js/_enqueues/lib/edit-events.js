@@ -15,10 +15,12 @@
 		document
 			.querySelectorAll( '#get-shortlink' )
 			.forEach( function ( item ) {
-				item.addEventListener( 'click', function ( ) {
-					prompt('URL:', document.getElementById("shortlink").value);
+				item.addEventListener( 'click', function () {
+					prompt(
+						'URL:',
+						document.getElementById( 'shortlink' ).value
+					);
 				} );
 			} );
-
 	} );
 } )( document );

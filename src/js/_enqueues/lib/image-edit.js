@@ -171,7 +171,7 @@
 		 *
 		 * @return {void}
 		 */
-		initEventHandlers: function() {
+		initEventHandlers: function () {
 			$( 'img.image-preview' ).on( 'load', function () {
 				imageEdit.imgLoaded( parseInt( this.dataset.postId ) );
 			} );

@@ -5,14 +5,14 @@
  * Metabox related event handlers.
  *
  * @since 5.6.0
- * 
+ *
  * @requires common
  * @requires edit-comments
  * @requires post
  *
  * @param {Object} document  The document object.
  * @param {Object} window  The window object.
- * 
+ *
  * @return {void}
  */
 ( function ( document, window ) {
@@ -25,55 +25,58 @@
 				} );
 			} );
 
-			document
+		document
 			.querySelectorAll( '.permanent-deletion' )
 			.forEach( function ( item ) {
 				item.addEventListener( 'click', function ( event ) {
-					if(! showNotice.warn() ){
+					if ( ! showNotice.warn() ) {
 						event.preventDefault();
 					}
-				} );				
+				} );
 			} );
 
-			document
+		document
 			.querySelectorAll( '.submitdelete-link' )
 			.forEach( function ( item ) {
 				item.addEventListener( 'click', function ( event ) {
-					if( ! confirm( item.dataset.prompt ) ){
+					if ( ! confirm( item.dataset.prompt ) ) {
 						event.preventDefault();
 					}
-				} );				
+				} );
 			} );
 
-			document
+		document
 			.querySelectorAll( '#add-new-comment > button' )
 			.forEach( function ( item ) {
-				item.addEventListener( 'click', function ( event ) {
-					if( ! ( window.commentReply && commentReply.addcomment( parseInt( item.dataset.postId ) ) ) ) {
-						event.preventDefault();
+				item.addEventListener( 'click', function () {
+					if ( window.commentReply ) {
+						commentReply.addcomment(
+							parseInt( item.dataset.postId )
+						);
 					}
-				} );				
+				} );
 			} );
 
-
-			document
+		document
 			.querySelectorAll( '.open-comment-reply' )
 			.forEach( function ( item ) {
-				item.addEventListener( 'click', function ( event ) {
-					if( ! ( window.commentReply && commentReply.open( item.dataset.commentId, item.dataset.postId ) ) ) {
-						event.preventDefault();
+				item.addEventListener( 'click', function () {
+					if ( window.commentReply ) {
+						commentReply.open(
+							item.dataset.commentId,
+							item.dataset.postId
+						);
 					}
-				} );				
+				} );
 			} );
 
-			document
+		document
 			.querySelectorAll( '#commentstatusdiv' )
 			.forEach( function ( item ) {
-				item.addEventListener( 'click', function () {
-					commentsBox.load(item.dataset.total);
+				item.addEventListener( 'click', function ( event ) {
+					commentsBox.load( item.dataset.total );
 					event.preventDefault();
-				} );				
+				} );
 			} );
-
 	} );
 } )( document, window );
