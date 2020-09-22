@@ -271,7 +271,7 @@ $content = esc_textarea( $content );
 		<div id="documentation" class="hide-if-no-js">
 			<label for="docs-list"><?php _e( 'Documentation:' ); ?></label>
 			<?php echo $docs_select; ?>
-			<input disabled id="docs-lookup" type="button" data-locale="<?php echo esc_attr( urlencode( get_user_locale() ) ); ?>" data-version="<?php echo esc_attr( urlencode( get_bloginfo( 'version' ) ) ); ?>" class="button" value="<?php esc_attr_e( 'Look Up' ); ?>" />
+			<input disabled id="docs-lookup" type="button" data-locale="<?php echo esc_attr( get_user_locale() ); ?>" data-version="<?php echo esc_attr( get_bloginfo( 'version' ) ); ?>" class="button" value="<?php esc_attr_e( 'Look Up' ); ?>" />
 	</div>
 	<?php endif; ?>
 

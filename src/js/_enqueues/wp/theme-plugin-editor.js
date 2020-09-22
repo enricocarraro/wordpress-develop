@@ -88,9 +88,9 @@ wp.themePluginEditor = (function( $ ) {
 					'https://api.wordpress.org/core/handbook/1.0/?function=' +
 						escape( component.docsLookUpList.val() ) +
 						'&locale=' +
-						component.docsLookUpList.data( 'locale' ) +
+						escape( component.docsLookUpButton.data( 'locale' ) ) +
 						'&version=' +
-						component.docsLookUpList.data( 'version' ) +
+						escape( component.docsLookUpButton.data( 'version' ) ) +
 						'&redirect=true'
 				);
 			}
