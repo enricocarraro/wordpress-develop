@@ -86,11 +86,15 @@ wp.themePluginEditor = (function( $ ) {
 			if ( '' != component.docsLookUpList.val() ) {
 				window.open(
 					'https://api.wordpress.org/core/handbook/1.0/?function=' +
-						escape( component.docsLookUpList.val() ) +
+						encodeURIComponent( component.docsLookUpList.val() ) +
 						'&locale=' +
-						escape( component.docsLookUpButton.data( 'locale' ) ) +
+						encodeURIComponent(
+							component.docsLookUpButton.data( 'locale' )
+						) +
 						'&version=' +
-						escape( component.docsLookUpButton.data( 'version' ) ) +
+						encodeURIComponent(
+							component.docsLookUpButton.data( 'version' )
+						) +
 						'&redirect=true'
 				);
 			}
