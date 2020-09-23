@@ -43,6 +43,15 @@ jQuery(document).ready( function($) {
 	 */
 	$('#link-category-add-submit').click( function() { newCat.focus(); } );
 
+	// Adds event handler that prompts the user with confirmation dialog
+	$('.submitdelete-link' ).each( function () {
+		$( this ).click( function ( event ) {
+			if ( ! confirm( this.dataset.prompt ) ) {
+				event.preventDefault();
+			}
+		} );
+	} );
+
 	/**
 	 * Synchronize category checkboxes.
 	 *

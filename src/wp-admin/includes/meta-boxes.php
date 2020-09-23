@@ -1072,7 +1072,6 @@ function link_submit_meta_box( $link ) {
 <div id="delete-action">
 	<?php
 	if ( ! empty( $_GET['action'] ) && 'edit' === $_GET['action'] && current_user_can( 'manage_links' ) ) {
-		wp_enqueue_script( 'metabox-events' );
 		printf(
 			'<a class="submitdelete deletion submitdelete-link" href="%s" data-prompt="%s">%s</a>',
 			wp_nonce_url( "link.php?action=delete&amp;link_id=$link->link_id", 'delete-bookmark_' . $link->link_id ),

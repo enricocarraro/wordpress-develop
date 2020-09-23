@@ -36,16 +36,6 @@
 			} );
 
 		document
-			.querySelectorAll( '.submitdelete-link' )
-			.forEach( function ( item ) {
-				item.addEventListener( 'click', function ( event ) {
-					if ( ! confirm( item.dataset.prompt ) ) {
-						event.preventDefault();
-					}
-				} );
-			} );
-
-		document
 			.querySelectorAll( '#add-new-comment > button' )
 			.forEach( function ( item ) {
 				item.addEventListener( 'click', function () {
