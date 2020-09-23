@@ -259,6 +259,7 @@ module.exports = function(grunt) {
 					[ WORKING_DIR + 'wp-admin/js/inline-edit-tax.js' ]: [ './src/js/_enqueues/admin/inline-edit-tax.js' ],
 					[ WORKING_DIR + 'wp-admin/js/language-chooser.js' ]: [ './src/js/_enqueues/lib/language-chooser.js' ],
 					[ WORKING_DIR + 'wp-admin/js/link.js' ]: [ './src/js/_enqueues/admin/link.js' ],
+					[ WORKING_DIR + 'wp-admin/js/link-manager.js' ]: [ './src/js/_enqueues/admin/link-manager.js' ],
 					[ WORKING_DIR + 'wp-admin/js/media-events.js' ]: [ './src/js/_enqueues/admin/media-events.js' ],
 					[ WORKING_DIR + 'wp-admin/js/media-gallery.js' ]: [ './src/js/_enqueues/deprecated/media-gallery.js' ],
 					[ WORKING_DIR + 'wp-admin/js/media-upload.js' ]: [ './src/js/_enqueues/admin/media-upload.js' ],
