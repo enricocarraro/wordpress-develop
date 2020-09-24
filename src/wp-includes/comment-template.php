@@ -1827,7 +1827,7 @@ function get_post_reply_link( $args = array(), $post = null ) {
 		$js = <<<JS
 document.addEventListener( 'DOMContentLoaded', function () {
 	document.getElementById( 'comment-reply-link-{$post->ID}' ).addEventListener( 'click', function ( event ) {
-		if ( ! addComment.moveForm( "{$args['add_below']}-{$post->ID}", "0", "{$args['respond_id']}", "{$post->ID}" ) ) {
+		if ( addComment.moveForm( "{$args['add_below']}-{$post->ID}", "0", "{$args['respond_id']}", "{$post->ID}" ) === false ) {
 			event.preventDefault();
 		}
 	} );
