@@ -75,7 +75,7 @@ function render_block_core_archives( $attributes ) {
 	$js = <<<JS
 document.addEventListener( 'DOMContentLoaded', function () {
 		document.getElementById( '$dropdown_id' ).addEventListener( 'change', function () {
-			document.location.href=this.options[this.selectedIndex].value;
+			document.location.href = this.options[this.selectedIndex].value;
 		} );
 	} );
 JS;
