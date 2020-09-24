@@ -174,7 +174,6 @@
 		// Binds the click event to the 'Delete Permanently' button.
 		$( '.warn-media-delete' ).click( function () {
 				return showNotice.warn();
-			});
 		});
 
 		// Binds the click event to the 'Attach' button.

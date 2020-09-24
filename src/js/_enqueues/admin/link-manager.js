@@ -10,6 +10,7 @@
  *
  * @return {void}
  */
+ /* global confirm */
 ( function ( document ) {
 	document.addEventListener( 'DOMContentLoaded', function () {
 		document.querySelectorAll( '.submitdelete-link' ).forEach( function ( item ) {

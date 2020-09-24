@@ -15,6 +15,8 @@
  *
  * @return {void}
  */
+
+ /* global commentsBox, commentReply, showNotice  */
 ( function ( document, window ) {
 	document.addEventListener( 'DOMContentLoaded', function () {
 		document
@@ -41,7 +43,7 @@
 				item.addEventListener( 'click', function () {
 					if ( window.commentReply ) {
 						commentReply.addcomment(
-							parseInt( item.dataset.postId )
+							parseInt( item.dataset.postId, 10 )
 						);
 					}
 				} );

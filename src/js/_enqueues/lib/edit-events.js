@@ -10,6 +10,8 @@
  *
  * @return {void}
  */
+
+ /* global prompt  */
 ( function ( document ) {
 	document.addEventListener( 'DOMContentLoaded', function () {
 		document
