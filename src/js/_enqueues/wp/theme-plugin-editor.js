@@ -84,18 +84,11 @@ wp.themePluginEditor = (function( $ ) {
 
 		component.docsLookUpButton.on( 'click', function () {
 			if ( '' != component.docsLookUpList.val() ) {
+				var func = encodeURIComponent( component.docsLookUpList.val() );
+				var locale = encodeURIComponent( window.themePluginEditorL10n.locale );
+				var version = encodeURIComponent( window.themePluginEditorL10n.wpVersion );
 				window.open(
-					'https://api.wordpress.org/core/handbook/1.0/?function=' +
-						encodeURIComponent( component.docsLookUpList.val() ) +
-						'&locale=' +
-						encodeURIComponent(
-							component.docsLookUpButton.data( 'locale' )
-						) +
-						'&version=' +
-						encodeURIComponent(
-							component.docsLookUpButton.data( 'version' )
-						) +
-						'&redirect=true'
+					`https://api.wordpress.org/core/handbook/1.0/?function=${ func }&locale=${ locale }&version=${ version }&redirect=true`
 				);
 			}
 		} );

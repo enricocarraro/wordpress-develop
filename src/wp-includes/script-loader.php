@@ -1016,6 +1016,14 @@ function wp_default_scripts( $scripts ) {
 	$scripts->add( 'code-editor', "/wp-admin/js/code-editor$suffix.js", array( 'jquery', 'wp-codemirror', 'underscore' ) );
 	$scripts->add( 'wp-theme-plugin-editor', "/wp-admin/js/theme-plugin-editor$suffix.js", array( 'common', 'wp-util', 'wp-sanitize', 'jquery', 'jquery-ui-core', 'wp-a11y', 'underscore' ) );
 	$scripts->set_translations( 'wp-theme-plugin-editor' );
+	$scripts->localize(
+		'wp-theme-plugin-editor',
+		'themePluginEditorL10n',
+		array(
+			'locale'    => get_user_locale(),
+			'wpVersion' => get_bloginfo( 'version' ),
+		)
+	);
 
 	$scripts->add( 'wp-playlist', "/wp-includes/js/mediaelement/wp-playlist$suffix.js", array( 'wp-util', 'backbone', 'mediaelement' ), false, 1 );
 
