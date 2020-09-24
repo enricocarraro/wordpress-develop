@@ -99,4 +99,9 @@ jQuery(document).ready( function($) {
 		$edittimestamp.show().focus();
 		$timestampdiv.slideUp( 'fast' );
 	});
+
+	$('#go-back').click( function () {
+		window.history.go(-1);
+		return false;
+	});
 });
