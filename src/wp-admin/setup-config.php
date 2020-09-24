@@ -426,6 +426,7 @@ switch ( $step ) {
 	}
 } )();
 JS;
+			wp_print_inline_script_tag( $js );
 	else :
 		/*
 		 * If this file doesn't exist, then we are using the wp-config-sample.php
