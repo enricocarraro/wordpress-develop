@@ -1,5 +1,5 @@
 /**
- * @output wp-admin/js/link-manager.js
+ * @output wp-admin/js/themes-list.js
  */
 /**
  * Link manager event handler
