@@ -172,11 +172,8 @@
 		});
 
 		// Binds the click event to the 'Delete Permanently' button.
-		$( '.warn-media-delete' ).each( function () {
-			$( this ).click( function ( event ) {
-				if ( ! showNotice.warn() ) {
-					event.preventDefault();
-				}
+		$( '.warn-media-delete' ).click( function () {
+				return showNotice.warn();
 			});
 		});
 
