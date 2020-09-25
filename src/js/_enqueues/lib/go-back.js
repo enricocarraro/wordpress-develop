@@ -1,5 +1,5 @@
 /**
- * @output wp-admin/js/setup-config.js
+ * @output wp-includes/js/go-back.js
  */
 /**
  * Setup config event handler

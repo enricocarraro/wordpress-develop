@@ -3407,6 +3407,7 @@ function wp_die( $message = '', $title = '', $args = array() ) {
  */
 function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 	list( $message, $title, $parsed_args ) = _wp_die_process_input( $message, $title, $args );
+	$back_link                             = false;
 
 	if ( is_string( $message ) ) {
 		if ( ! empty( $parsed_args['additional_errors'] ) ) {
@@ -3436,7 +3437,8 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 
 	if ( isset( $parsed_args['back_link'] ) && $parsed_args['back_link'] ) {
 		$back_text = $have_gettext ? __( '&laquo; Back' ) : '&laquo; Back';
-		$message  .= "\n<p><a href='javascript:history.back()'>$back_text</a></p>";
+		$message  .= "\n<p><a id='go-back' href='#'>$back_text</a></p>";
+		$back_link = true;
 	}
 
 	if ( ! did_action( 'admin_head' ) ) :
@@ -3586,6 +3588,11 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 <body id="error-page">
 <?php endif; // ! did_action( 'admin_head' ) ?>
 	<?php echo $message; ?>
+	<?php
+	if ( $back_link ) {
+		wp_print_scripts( array( 'go-back' ) );
+	}
+	?>
 </body>
 </html>
 	<?php
