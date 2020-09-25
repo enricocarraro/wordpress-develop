@@ -652,7 +652,7 @@ final class WP_Customize_Nav_Menus {
 		if ( current_theme_supports( 'widgets' ) ) {
 			/* translators: 'widget areas' link moves view to the Widgets panel of the Customizer. */
 			$description .= '<p>' .
-				__( 'Menus can be displayed in locations defined by your theme or in <a class="focus-widgets" href="#">widget areas</a> by adding a &#8220;Navigation Menu&#8221; widget.' ) . '</p>';
+				__( 'Menus can be displayed in locations defined by your theme or in <button type="button" class="button-link focus-widgets">widget areas</button> by adding a &#8220;Navigation Menu&#8221; widget.' ) . '</p>';
 		} else {
 			$description .= '<p>' . __( 'Menus can be displayed in locations defined by your theme.' ) . '</p>';
 		}
@@ -686,7 +686,7 @@ final class WP_Customize_Nav_Menus {
 
 		if ( current_theme_supports( 'widgets' ) ) {
 			/* translators: 'widget areas' link moves view to the Widgets panel of the Customizer. */
-			$description .= '<p>' . __( 'If your theme has widget areas, you can also add menus there. Visit the <a class="focus-widgets" href="#">Widgets panel</a> and add a &#8220;Navigation Menu widget&#8221; to display a menu in a sidebar or footer.' ) . '</p>';
+			$description .= '<p>' . __( 'If your theme has widget areas, you can also add menus there. Visit the <button type="button" class="button-link focus-widgets">Widgets panel</button> and add a &#8220;Navigation Menu widget&#8221; to display a menu in a sidebar or footer.' ) . '</p>';
 		}
 
 		$this->manager->add_section(
