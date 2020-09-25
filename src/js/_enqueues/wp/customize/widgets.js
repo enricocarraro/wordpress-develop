@@ -2318,7 +2318,7 @@
 		} );
 
 		// 'Create some' button is shown when there are no menus. Switches focus to nav_menus view.
-		focusNavMenus.on( 'click', function () {
+		focusNavMenus.click( function () {
 			api.panel( 'nav_menus' ).focus();
 			return false;
 		} );
