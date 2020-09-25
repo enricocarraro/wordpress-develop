@@ -1,5 +1,5 @@
 /**
- * @output wp-includes/js/go-back.js
+ * @output wp-admin/js/setup-config.js
  */
 /**
  * Vanilla JavaScript 'Go back' event handler
