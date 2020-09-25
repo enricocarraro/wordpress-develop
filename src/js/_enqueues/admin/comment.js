@@ -99,10 +99,4 @@ jQuery(document).ready( function($) {
 		$edittimestamp.show().focus();
 		$timestampdiv.slideUp( 'fast' );
 	});
-
-	// Event handler for "Go back" link in case of invalid comment ID.
-	$('#go-back').click( function () {
-		window.history.go(-1);
-		return false;
-	});
 });
