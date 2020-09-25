@@ -2,7 +2,7 @@
  * @output wp-includes/js/go-back.js
  */
 /**
- * Setup config event handler
+ * Vanilla JavaScript 'Go back' event handler
  *
  * @since 5.6.0
  *
@@ -13,12 +13,11 @@
  */
 ( function ( document, window ) {
 	document.addEventListener( 'DOMContentLoaded', function () {
-		var tryAgain = document.getElementById( 'go-back' );
-		if ( tryAgain !== null ) {
-			tryAgain.addEventListener( 'click', function ( event ) {
+		document.querySelectorAll( '.go-back' ).forEach( function ( item ) {
+			item.addEventListener( 'click', function ( event ) {
 				window.history.go( -1 );
 				event.preventDefault();
 			} );
-		}
+		} );
 	} );
 } )( document, window );

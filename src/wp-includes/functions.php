@@ -3437,7 +3437,7 @@ function _default_wp_die_handler( $message, $title = '', $args = array() ) {
 
 	if ( isset( $parsed_args['back_link'] ) && $parsed_args['back_link'] ) {
 		$back_text = $have_gettext ? __( '&laquo; Back' ) : '&laquo; Back';
-		$message  .= "\n<p><a id='go-back' href='#'>$back_text</a></p>";
+		$message  .= "\n<p><a class='go-back' href='#'>$back_text</a></p>";
 		$back_link = true;
 	}
 

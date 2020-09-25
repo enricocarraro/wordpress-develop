@@ -279,7 +279,7 @@ switch ( $step ) {
 			$install .= '?language=en_US';
 		}
 
-		$tryagain_link = '</p><p class="step"><a id="go-back" href="' . $step_1 . '" class="button button-large">' . __( 'Try Again' ) . '</a>';
+		$tryagain_link = '</p><p class="step"><a href="' . $step_1 . '" class="button button-large go-back">' . __( 'Try Again' ) . '</a>';
 
 		if ( empty( $prefix ) ) {
 			wp_die( __( '<strong>Error</strong>: "Table Prefix" must not be empty.' ) . $tryagain_link );

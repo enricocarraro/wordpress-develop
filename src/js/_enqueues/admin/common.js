@@ -1939,7 +1939,7 @@ $document.ready( function() {
 	});
 
 	// Event handler for "Go back" link (if present)
-	$('#go-back').click( function () {
+	$('.go-back').click( function () {
 		window.history.go( -1 );
 		return false;
 	});
