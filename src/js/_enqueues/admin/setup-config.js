@@ -13,7 +13,7 @@
  */
 ( function ( document, window ) {
 	document.addEventListener( 'DOMContentLoaded', function () {
-		var tryAgain = document.getElementById( 'try-again-link' );
+		var tryAgain = document.getElementById( 'go-back' );
 		if ( tryAgain !== null ) {
 			tryAgain.addEventListener( 'click', function ( event ) {
 				window.history.go( -1 );

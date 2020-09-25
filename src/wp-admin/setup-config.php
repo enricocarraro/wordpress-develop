@@ -40,6 +40,8 @@ require_once ABSPATH . 'wp-admin/includes/translation-install.php';
 
 nocache_headers();
 
+wp_print_scripts( array( 'setup-config' ) );
+
 // Support wp-config-sample.php one level up, for the develop repo.
 if ( file_exists( ABSPATH . 'wp-config-sample.php' ) ) {
 	$config_file = file( ABSPATH . 'wp-config-sample.php' );
@@ -277,7 +279,7 @@ switch ( $step ) {
 			$install .= '?language=en_US';
 		}
 
-		$tryagain_link = '</p><p class="step"><a id="try-again-link" href="' . $step_1 . '" class="button button-large">' . __( 'Try Again' ) . '</a>';
+		$tryagain_link = '</p><p class="step"><a id="go-back" href="' . $step_1 . '" class="button button-large">' . __( 'Try Again' ) . '</a>';
 
 		if ( empty( $prefix ) ) {
 			wp_die( __( '<strong>Error</strong>: "Table Prefix" must not be empty.' ) . $tryagain_link );
@@ -455,6 +457,6 @@ JS;
 		break;
 }
 ?>
-<?php wp_print_scripts( array( 'language-chooser', 'setup-config' ) ); ?>
+<?php wp_print_scripts( array( 'language-chooser' ) ); ?>
 </body>
 </html>
