@@ -7650,6 +7650,8 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
 	/**
 	 * Filters script attributes.
 	 *
+	 * @since 5.6.0
+	 *
 	 * @param string $attributes    Associative array representing script attributes.
 	 */
 	$attributes = apply_filters( 'wp_script_attributes', $attributes );
