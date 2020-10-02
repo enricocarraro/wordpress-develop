@@ -7678,7 +7678,6 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
  * Automatically injects type attribute if needed.
  *
  * @param array     $attributes     `<script>` tag attributes.
- * @param bool      $double_quotes  Optional. Uses double quotes `"` to wrap attribute values if true, single quotes `'` otherwise.
  * @param bool      $echo           Optional. Prints to the page if true, returns the value otherwise.
  * @param string    $content        Optional. Code to be wrapped around `<script>` tags.
  * @return string|null  Inline JavaScript code wrapped around `<script>` tags if $echo is true, null otherwise.
@@ -7701,7 +7700,6 @@ function wp_print_script_loader_tag( $attributes, $echo = true ) {
  *
  * @param string    $javascript     Inline JavaScript code.
  * @param array     $attributes     Optional. `<script>` tag attributes.
- * @param bool      $double_quotes  Optional. Uses double quotes `"` to wrap attribute values if true, single quotes `'` otherwise.
  * @param bool      $echo           Optional. Prints to the page if true, returns the value otherwise.
  * @return string|null  Inline JavaScript code wrapped around `<script>` tags if $echo is true, null otherwise.
  */
