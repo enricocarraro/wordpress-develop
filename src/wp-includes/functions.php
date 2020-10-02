@@ -7642,7 +7642,7 @@ function wp_fuzzy_number_match( $expected, $actual, $precision = 1 ) {
  *
  * @since 5.6.0
  *
- * @param array     $attributes     Optional. `<script>` tag attributes.
+ * @param array     $attributes     Optional. Key-value pairs representing `<script>` tag attributes.
  * @return string  String made of sanitized `<script>` tag attributes.
  */
 function wp_sanitize_script_attributes( $attributes = array() ) {
@@ -7654,7 +7654,7 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
 	 *
 	 * @since 5.6.0
 	 *
-	 * @param string $attributes    Associative array representing script attributes.
+	 * @param array $attributes    Key-value pairs representing `<script>` tag attributes.
 	 */
 	$attributes = apply_filters( 'wp_script_attributes', $attributes );
 
@@ -7681,7 +7681,7 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
  *
  * @since 5.6.0
  *
- * @param array     $attributes     `<script>` tag attributes.
+ * @param array     $attributes     Key-value pairs representing `<script>` tag attributes.
  * @return string  String containing `<script>` opening and closing tags.
  */
 function wp_get_script_tag( $attributes ) {
@@ -7696,7 +7696,7 @@ function wp_get_script_tag( $attributes ) {
  *
  * @since 5.6.0
  *
- * @param array     $attributes     `<script>` tag attributes.
+ * @param array     $attributes     Key-value pairs representing `<script>` tag attributes.
  * @return null     Null value.
  */
 function wp_print_script_tag( $attributes ) {
@@ -7712,11 +7712,23 @@ function wp_print_script_tag( $attributes ) {
  * @since 5.6.0
  *
  * @param string    $javascript     Inline JavaScript code.
- * @param array     $attributes     Optional. `<script>` tag attributes.
+ * @param array     $attributes     Optional. Key-value pairs representing `<script>` tag attributes.
  * @return string  String containing inline JavaScript code wrapped around `<script>` tags.
  */
 function wp_get_inline_script_tag( $javascript, $attributes = array() ) {
 	$javascript = "\n" . trim( $javascript, "\n\r " ) . "\n";
+
+	/**
+	 * Fires once the given script is being written.
+	 *
+	 * Can be used to generate the hash of the script.
+	 *
+	 * @since 5.6.0
+	 *
+	 * @param string $javascript Inline JavaScript code.
+	 * @param array $attributes Key-value pairs representing `<script>` tag attributes.
+	 */
+	do_action( 'wp_get_inline_script_tag', $javascript, $attributes );
 
 	return sprintf( "<script%s>%s</script>\n", wp_sanitize_script_attributes( $attributes ), $javascript );
 }
@@ -7730,7 +7742,7 @@ function wp_get_inline_script_tag( $javascript, $attributes = array() ) {
  * @since 5.6.0
  *
  * @param string    $javascript     Inline JavaScript code.
- * @param array     $attributes     Optional. `<script>` tag attributes.
+ * @param array     $attributes     Optional. Key-value pairs representing `<script>` tag attributes.
  * @return null  Null value.
  */
 function wp_print_inline_script_tag( $javascript, $attributes = array() ) {
