@@ -1627,7 +1627,7 @@ JS;
 
 			if ( self::$ext_plugins ) {
 				// Load the old-format English strings to prevent unsightly labels in old style popups.
-				wp_print_script_loader_tag(
+				wp_print_script_tag(
 					array(
 						'type' => 'text/javascript',
 						'src'  => "{$baseurl}/langs/wp-langs-en.js?$version",

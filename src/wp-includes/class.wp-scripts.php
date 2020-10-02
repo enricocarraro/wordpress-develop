@@ -292,18 +292,16 @@ class WP_Scripts extends WP_Dependencies {
 		$after_handle  = $this->print_inline_script( $handle, 'after', false );
 
 		if ( $before_handle ) {
-			$before_handle = wp_print_inline_script_tag(
+			$before_handle = wp_get_inline_script_tag(
 				$before_handle,
-				array( 'id' => "$handle-js-before" ),
-				false
+				array( 'id' => "$handle-js-before" )
 			);
 		}
 
 		if ( $after_handle ) {
-			$after_handle = wp_print_inline_script_tag(
+			$after_handle = wp_get_inline_script_tag(
 				$after_handle,
-				array( 'id' => "$handle-js-after" ),
-				false
+				array( 'id' => "$handle-js-after" )
 			);
 		}
 
@@ -315,10 +313,9 @@ class WP_Scripts extends WP_Dependencies {
 
 		$translations = $this->print_translations( $handle, false );
 		if ( $translations ) {
-			$translations = wp_print_inline_script_tag(
+			$translations = wp_get_inline_script_tag(
 				$translations,
-				array( 'id' => "$handle-js-translations" ),
-				false
+				array( 'id' => "$handle-js-translations" )
 			);
 		}
 
@@ -391,12 +388,11 @@ class WP_Scripts extends WP_Dependencies {
 		}
 
 		$tag  = $translations . $cond_before . $before_handle;
-		$tag .= wp_print_script_loader_tag(
+		$tag .= wp_get_script_tag(
 			array(
 				'src' => $src,
 				'id'  => "$handle-js",
-			),
-			false
+			)
 		);
 		$tag .= $after_handle . $cond_after;
 

@@ -465,7 +465,7 @@ JS;
 	}
 	$script_output .= "\n//--><!]]>";
 
-	$output .= wp_print_inline_script_tag( $script_output, array(), false );
+	$output .= wp_get_inline_script_tag( $script_output );
 
 	$output .= sprintf(
 		'<iframe sandbox="allow-scripts" security="restricted" src="%1$s" width="%2$d" height="%3$d" title="%4$s" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="wp-embedded-content"></iframe>',
