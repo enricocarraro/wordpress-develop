@@ -7641,7 +7641,6 @@ function wp_fuzzy_number_match( $expected, $actual, $precision = 1 ) {
  * Used by wp_print_script_loader_tag() and wp_print_inline_script_tag().
  *
  * @param array     $attributes     Optional. `<script>` tag attributes.
- * @param bool      $double_quotes  Optional. Uses double quotes `"` to wrap attribute values if true, single quotes `'` otherwise.
  * @return string  Inline JavaScript code wrapped around <script> tags if $echo is true, null otherwise.
  */
 function wp_sanitize_script_attributes( $attributes = array() ) {
