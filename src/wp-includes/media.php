@@ -2943,7 +2943,7 @@ function wp_audio_shortcode( $attr, $content = '' ) {
 	$html = '';
 
 	if ( 'mediaelement' === $library && 1 === $instance ) {
-		$html .= '<!--[if lt IE 9]>' . trim( wp_print_inline_script_tag( 'document.createElement("audio");', array(), false ) ) . "<![endif]-->\n";
+		$html .= '<!--[if lt IE 9]>' . trim( wp_get_inline_script_tag( 'document.createElement("audio");' ) ) . "<![endif]-->\n";
 	}
 
 	$html .= sprintf( '<audio %s controls="controls">', join( ' ', $attr_strings ) );
@@ -3211,7 +3211,7 @@ function wp_video_shortcode( $attr, $content = '' ) {
 	$html = '';
 
 	if ( 'mediaelement' === $library && 1 === $instance ) {
-		$html .= '<!--[if lt IE 9]>' . trim( wp_print_inline_script_tag( 'document.createElement("video");', array(), false ) ) . "<![endif]-->\n";
+		$html .= '<!--[if lt IE 9]>' . trim( wp_get_inline_script_tag( 'document.createElement("video");' ) ) . "<![endif]-->\n";
 	}
 
 	$html .= sprintf( '<video %s controls="controls">', join( ' ', $attr_strings ) );
