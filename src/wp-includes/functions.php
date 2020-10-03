@@ -7655,6 +7655,7 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
 	 * @since 5.6.0
 	 *
 	 * @param array $attributes    Key-value pairs representing `<script>` tag attributes.
+	 * @return array New key-value pairs representing `<script>` tag attributes.
 	 */
 	$attributes = apply_filters( 'wp_script_attributes', $attributes );
 
