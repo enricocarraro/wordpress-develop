@@ -160,7 +160,7 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 		add_filter(
 			'wp_script_attributes',
 			function( $attributes ) {
-				if ( isset( $attributes['id'] ) && $attributes['id'] === 'utils-js-extra' ) {
+				if ( isset( $attributes['id'] ) && 'utils-js-extra' === $attributes['id'] ) {
 					$attributes['async'] = true;
 				}
 				return $attributes;
@@ -188,7 +188,7 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 		add_filter(
 			'wp_script_attributes',
 			function( $attributes ) {
-				if ( isset( $attributes['id'] ) && $attributes['id'] === 'utils-js-extra' ) {
+				if ( isset( $attributes['id'] ) && 'utils-js-extra' === $attributes['id'] ) {
 					$attributes['async'] = true;
 				}
 				return $attributes;
