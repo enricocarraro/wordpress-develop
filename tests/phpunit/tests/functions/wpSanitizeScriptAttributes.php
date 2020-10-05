@@ -7,24 +7,9 @@
  */
 class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 
-	function html5_script_support() {
-		global $_wp_theme_features;
-		$_wp_theme_features = array(
-			'html5' => array(
-				array( 'script' ),
-			),
-		);
-	}
-
-	function no_html5_script_support() {
-		global $_wp_theme_features;
-		if ( isset( $_wp_theme_features['html5'] ) ) {
-			unset( $_wp_theme_features['html5'] );
-		}
-	}
-
 	function test_sanitize_script_attributes_type_set_html5_script_support() {
-		$this->html5_script_support();
+		add_theme_support( 'html5', array( 'script' ) );
+
 		$this->assertSame(
 			' type="application/javascript" src="PATH/FILE.js" nomodule',
 			wp_sanitize_script_attributes(
@@ -36,10 +21,12 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 				)
 			)
 		);
+
+		remove_theme_support( 'html5' );
 	}
 
 	function test_sanitize_script_attributes_type_set_no_html5_script_support() {
-		$this->no_html5_script_support();
+		remove_theme_support( 'html5' );
 
 		$this->assertSame(
 			' src="PATH/FILE.js" type="application/javascript" nomodule',
@@ -56,7 +43,7 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 
 
 	function test_sanitize_script_attributes_type_not_set_html5_script_support() {
-		$this->html5_script_support();
+		add_theme_support( 'html5', array( 'script' ) );
 
 		$this->assertSame(
 			' src="PATH/FILE.js" nomodule',
@@ -68,10 +55,12 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 				)
 			)
 		);
+
+		remove_theme_support( 'html5' );
 	}
 
 	function test_sanitize_script_attributes_type_not_set_no_html5_script_support() {
-		$this->no_html5_script_support();
+		remove_theme_support( 'html5' );
 
 		$this->assertSame(
 			' src="PATH/FILE.js" nomodule type="text/javascript"',
@@ -87,16 +76,18 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 
 
 	function test_sanitize_script_attributes_no_attributes_html5_script_support() {
-		$this->html5_script_support();
+		add_theme_support( 'html5', array( 'script' ) );
 
 		$this->assertSame(
 			'',
 			wp_sanitize_script_attributes()
 		);
+
+		remove_theme_support( 'html5' );
 	}
 
 	function test_sanitize_script_attributes_no_attributes_no_html5_script_support() {
-		$this->no_html5_script_support();
+		remove_theme_support( 'html5' );
 
 		$this->assertSame(
 			' type="text/javascript"',
@@ -105,7 +96,7 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 	}
 
 	function test_sanitize_script_attributes_only_false_boolean_attributes_html5_script_support() {
-		$this->html5_script_support();
+		add_theme_support( 'html5', array( 'script' ) );
 
 		$this->assertSame(
 			'',
@@ -116,10 +107,12 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 				)
 			)
 		);
+
+		remove_theme_support( 'html5' );
 	}
 
 	function test_sanitize_script_attributes_only_false_boolean_attributes_no_html5_script_support() {
-		$this->no_html5_script_support();
+		remove_theme_support( 'html5' );
 
 		$this->assertSame(
 			' type="text/javascript"',
@@ -132,7 +125,7 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 		);
 	}
 	function test_sanitize_script_attributes_only_true_boolean_attributes_html5_script_support() {
-		$this->html5_script_support();
+		add_theme_support( 'html5', array( 'script' ) );
 
 		$this->assertSame(
 			' async nomodule',
@@ -143,10 +136,12 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 				)
 			)
 		);
+
+		remove_theme_support( 'html5' );
 	}
 
 	function test_sanitize_script_attributes_only_true_boolean_attributes_no_html5_script_support() {
-		$this->no_html5_script_support();
+		remove_theme_support( 'html5' );
 
 		$this->assertSame(
 			' async nomodule type="text/javascript"',
@@ -160,7 +155,7 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 	}
 
 	function test_sanitize_script_attributes_wp_script_attributes_filter_html5_script_support() {
-		$this->html5_script_support();
+		add_theme_support( 'html5', array( 'script' ) );
 
 		add_filter(
 			'wp_script_attributes',
@@ -183,10 +178,12 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 				)
 			)
 		);
+
+		remove_theme_support( 'html5' );
 	}
 
 	function test_sanitize_script_attributes_wp_script_attributes_filter_no_html5_script_support() {
-		$this->no_html5_script_support();
+		remove_theme_support( 'html5' );
 
 		add_filter(
 			'wp_script_attributes',
@@ -210,6 +207,5 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 			)
 		);
 	}
-
 
 }
