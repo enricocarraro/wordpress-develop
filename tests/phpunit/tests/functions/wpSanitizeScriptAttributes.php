@@ -89,10 +89,6 @@ class Tests_Functions_wpSanitizeScriptAttributes extends WP_UnitTestCase {
 	function test_sanitize_script_attributes_no_attributes_html5_script_support() {
 		$this->html5_script_support();
 
-		if ( ! isset( $_wp_features['html5'] ) ) {
-			echo 'hey';
-		}
-
 		$this->assertSame(
 			'',
 			wp_sanitize_script_attributes()
