@@ -7642,7 +7642,7 @@ function wp_fuzzy_number_match( $expected, $actual, $precision = 1 ) {
  *
  * @since 5.6.0
  *
- * @param array     $attributes     Optional. Key-value pairs representing `<script>` tag attributes.
+ * @param array $attributes Optional. Key-value pairs representing `<script>` tag attributes.
  * @return string  String made of sanitized `<script>` tag attributes.
  */
 function wp_sanitize_script_attributes( $attributes = array() ) {
@@ -7681,7 +7681,7 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
  *
  * @since 5.6.0
  *
- * @param array     $attributes     Key-value pairs representing `<script>` tag attributes.
+ * @param array $attributes Key-value pairs representing `<script>` tag attributes.
  * @return string  String containing `<script>` opening and closing tags.
  */
 function wp_get_script_tag( $attributes ) {
