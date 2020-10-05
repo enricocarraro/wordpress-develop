@@ -69,22 +69,13 @@ function render_block_core_archives( $attributes ) {
 		$label = esc_attr( $label );
 
 		$block_content = '<label class="screen-reader-text" for="' . $dropdown_id . '">' . $title . '</label>
-	<select id="' . $dropdown_id . '" name="archive-dropdown">
+	<select id="' . $dropdown_id . '" name="archive-dropdown" onchange="document.location.href=this.options[this.selectedIndex].value;">
 	<option value="">' . $label . '</option>' . $archives . '</select>';
 
-	$js = <<<JS
-document.addEventListener( 'DOMContentLoaded', function () {
-		document.getElementById( '$dropdown_id' ).addEventListener( 'change', function () {
-			document.location.href = this.options[this.selectedIndex].value;
-		} );
-	} );
-JS;
-
 		return sprintf(
-			'<div class="%1$s">%2$s%3$s</div>',
+			'<div class="%1$s">%2$s</div>',
 			esc_attr( $class ),
-			$block_content,
-			wp_print_inline_script_tag( $js, array(), false )
+			$block_content
 		);
 	}
 
