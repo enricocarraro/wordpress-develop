@@ -3448,7 +3448,7 @@ document.addEventListener( 'DOMContentLoaded', function () {
 	} );
 } );
 JS;
-		$message .= wp_print_inline_script_tag( $js, array(), false );
+		$message .= wp_get_inline_script_tag( $js );
 	}
 
 	if ( ! did_action( 'admin_head' ) ) :
