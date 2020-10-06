@@ -7666,7 +7666,8 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
 				$attributes_string .= ' ' . $attribute_name;
 			}
 		} else {
-			$attributes_string .= sprintf( ' %s="%s"', $attribute_name, esc_attr( $attribute_value ) );
+			$attribute_value    = 'src' === $attribute_name ? esc_url( $attribute_value ) : esc_attr( $attribute_value );
+			$attributes_string .= sprintf( ' %s="%s"', $attribute_name, $attribute_value );
 		}
 	}
 
