@@ -7675,7 +7675,7 @@ function wp_sanitize_script_attributes( $attributes = array() ) {
 }
 
 /**
- * Wraps inline JavaScript in `<script>` tags.
+ * Creates a String containing a `<script>` tag.
  *
  * It is possible to inject attributes in the `<script>` tag via the `wp_script_attributes` filter.
  * Automatically injects type attribute if needed.
@@ -7690,7 +7690,7 @@ function wp_get_script_tag( $attributes ) {
 }
 
 /**
- * Wraps inline JavaScript in `<script>` tags.
+ * Prints a `<script>` tag.
  *
  * It is possible to inject attributes in the `<script>` tag via the `wp_script_attributes` filter.
  * Automatically injects type attribute if needed.
