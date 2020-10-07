@@ -196,7 +196,7 @@ function wp_get_script_polyfill( $scripts, $tests ) {
 		}
 
 		/** This filter is documented in wp-includes/class.wp-scripts.php */
-		$src = esc_url( apply_filters( 'script_loader_src', $src, $handle ) );
+		$src = apply_filters( 'script_loader_src', $src, $handle );
 
 		if ( ! $src ) {
 			continue;
