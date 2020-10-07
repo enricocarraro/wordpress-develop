@@ -632,7 +632,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core,jquery-migrate&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script src=\"http://example.com\" id=\"test-example-js\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"test-example-js-after\" type=\"text/javascript\">\nconsole.log(\"after\");\n</script>\n";
 
@@ -657,7 +657,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core,jquery-migrate&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<!--[if gte IE 9]>\n";
 		$expected .= "<script src=\"http://example.com\" id=\"test-example-js\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"test-example-js-after\" type=\"text/javascript\">\nconsole.log(\"after\");\n</script>\n";
@@ -686,7 +686,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core,jquery-migrate&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"test-example-js-before\" type=\"text/javascript\">\nconsole.log(\"before\");\n</script>\n";
 		$expected .= "<script src=\"http://example.com\" id=\"test-example-js\" type=\"text/javascript\"></script>\n";
 
@@ -712,7 +712,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core,jquery-migrate&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"test-example-js-before\" type=\"text/javascript\">\nconsole.log(\"before\");\n</script>\n";
 		$expected .= "<script src=\"http://example.com\" id=\"test-example-js\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script src=\"/wp-includes/js/dist/vendor/wp-polyfill.min.js\" id=\"wp-polyfill-js\" type=\"text/javascript\"></script>\n";
