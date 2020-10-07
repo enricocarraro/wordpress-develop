@@ -50,19 +50,6 @@
 			} );
 
 		document
-			.querySelectorAll( '.open-comment-reply' )
-			.forEach( function ( item ) {
-				item.addEventListener( 'click', function () {
-					if ( window.commentReply ) {
-						commentReply.open(
-							item.dataset.commentId,
-							item.dataset.postId
-						);
-					}
-				} );
-			} );
-
-		document
 			.querySelectorAll( '#commentstatusdiv' )
 			.forEach( function ( item ) {
 				item.addEventListener( 'click', function ( event ) {

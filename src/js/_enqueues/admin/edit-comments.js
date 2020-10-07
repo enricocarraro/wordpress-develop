@@ -813,6 +813,13 @@ window.commentReply = {
 				commentReply.close();
 		});
 
+		$('.open-comment-reply').click(function () {
+			commentReply.open(
+				this.dataset.commentId,
+				this.dataset.postId
+			);
+		});
+
 		this.comments_listing = $('#comments-form > input[name="comment_status"]').val() || '';
 	},
 
@@ -1153,6 +1160,13 @@ window.commentReply = {
 				}
 			});
 
+		// Adds event handlers to "Reply button" for the new comment.
+		$('.open-comment-reply').click(function () {
+			t.open(
+				this.dataset.commentId,
+				this.dataset.postId
+			);
+		});
 	},
 
 	/**
