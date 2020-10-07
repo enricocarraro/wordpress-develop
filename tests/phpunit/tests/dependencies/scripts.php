@@ -136,7 +136,7 @@ JS;
 		$print_scripts = get_echo( '_print_scripts' );
 
 		$ver      = get_bloginfo( 'version' );
-		$expected = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=one,two,three&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected = "<script src=\"/wp-admin/load-scripts.php?c=0&#038;load%5Bchunk_0%5D=one,two,three&#038;ver={$ver}\" type=\"text/javascript\"></script>\n";
 
 		$this->assertSame( $expected, $print_scripts );
 	}
@@ -580,7 +580,7 @@ JS;
 		wp_add_inline_script( 'three', 'console.log("after three");' );
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=one&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&#038;load%5Bchunk_0%5D=one&#038;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script src=\"/directory/two.js?ver={$ver}\" id=\"two-js\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"two-js-after\" type=\"text/javascript\">\nconsole.log(\"after two\");\n</script>\n";
 		$expected .= "<script src=\"/directory/three.js?ver={$ver}\" id=\"three-js\" type=\"text/javascript\"></script>\n";
@@ -632,7 +632,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&#038;load%5Bchunk_0%5D=jquery-core&#038;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script src=\"http://example.com\" id=\"test-example-js\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"test-example-js-after\" type=\"text/javascript\">\nconsole.log(\"after\");\n</script>\n";
 
@@ -657,7 +657,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&#038;load%5Bchunk_0%5D=jquery-core&#038;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<!--[if gte IE 9]>\n";
 		$expected .= "<script src=\"http://example.com\" id=\"test-example-js\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"test-example-js-after\" type=\"text/javascript\">\nconsole.log(\"after\");\n</script>\n";
@@ -686,7 +686,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&#038;load%5Bchunk_0%5D=jquery-core&#038;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"test-example-js-before\" type=\"text/javascript\">\nconsole.log(\"before\");\n</script>\n";
 		$expected .= "<script src=\"http://example.com\" id=\"test-example-js\" type=\"text/javascript\"></script>\n";
 
@@ -712,7 +712,7 @@ JS;
 		$wp_scripts->do_concat = true;
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=jquery-core&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&#038;load%5Bchunk_0%5D=jquery-core&#038;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"test-example-js-before\" type=\"text/javascript\">\nconsole.log(\"before\");\n</script>\n";
 		$expected .= "<script src=\"http://example.com\" id=\"test-example-js\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script src=\"/wp-includes/js/dist/vendor/wp-polyfill.min.js\" id=\"wp-polyfill-js\" type=\"text/javascript\"></script>\n";
@@ -824,7 +824,7 @@ JS;
 		wp_enqueue_script( 'four', '/wp-includes/js/script4.js' );
 
 		$ver       = get_bloginfo( 'version' );
-		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&amp;load%5Bchunk_0%5D=one,two&amp;ver={$ver}\" type=\"text/javascript\"></script>\n";
+		$expected  = "<script src=\"/wp-admin/load-scripts.php?c=0&#038;load%5Bchunk_0%5D=one,two&#038;ver={$ver}\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script id=\"three-js-before\" type=\"text/javascript\">\nconsole.log(\"before three\");\n</script>\n";
 		$expected .= "<script src=\"/wp-includes/js/script3.js?ver={$ver}\" id=\"three-js\" type=\"text/javascript\"></script>\n";
 		$expected .= "<script src=\"/wp-includes/js/script4.js?ver={$ver}\" id=\"four-js\" type=\"text/javascript\"></script>\n";
