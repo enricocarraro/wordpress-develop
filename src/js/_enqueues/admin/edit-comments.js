@@ -813,7 +813,7 @@ window.commentReply = {
 				commentReply.close();
 		});
 
-		$('.open-comment-reply').click(function () {
+		$('#the-comment-list').on('click', '.open-comment-reply', function () {
 			commentReply.open(
 				this.dataset.commentId,
 				this.dataset.postId
@@ -1159,14 +1159,6 @@ window.commentReply = {
 						.find('div.comment_status').html('1');
 				}
 			});
-
-		// Adds event handlers to "Reply button" for the new comment.
-		$('.open-comment-reply').click(function () {
-			t.open(
-				this.dataset.commentId,
-				this.dataset.postId
-			);
-		});
 	},
 
 	/**
